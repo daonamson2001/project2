@@ -22,8 +22,6 @@ Route::resource('class', ClassController::class);
 
 Route::get('class/{tenLop}/hide', [ClassController::class, 'hide'])->name('class.hide');
 
-
-
 // Route::get('/', function () {
 //     return view('dashboard');
 // });
