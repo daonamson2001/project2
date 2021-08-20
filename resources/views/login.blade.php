@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="form-group">
                                             <labl>Mật khẩu</labl>
-                                            <input type="password" name='password' class="form-control">
+                                            <input type="password" name='passWord' class="form-control">
                                         </div>
                                     </div>
                                     <center>

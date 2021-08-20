@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lop;
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 
 class ClassController extends Controller
 {
@@ -26,6 +28,7 @@ class ClassController extends Controller
      */
     public function create()
     {
+
         return view('class.create');
     }
 
@@ -55,10 +58,11 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $lop = Lop::where('idL', '=', $id)->first();
-        // $lop = Lop::find($id);
+        $search = $request->get('search');
+        $student = Student::join('lop', 'sinhvien.idL', '=', 'lop.idL')->select('*')->where('sinhvien.idL', '=', $id)->where('tenSV', 'LIKE', "%$search%")->paginate(10);
+        return view('class.show', ["student" => $student, "idL" => $id, "search" => $search,]);
     }
 
     /**
@@ -83,9 +87,8 @@ class ClassController extends Controller
     public function update(Request $request, $id)
     {
         $tenLop =  $request->get('tenLop');
-        $idCN = $request->get('idCN');
-        Lop::where('id', $id)->update([
-            "tenLop" => $tenLop, "idCN" => $idCN
+        Lop::where('idL', $id)->update([
+            "tenLop" => $tenLop,
         ]);
         return redirect(route('class.index'));
     }

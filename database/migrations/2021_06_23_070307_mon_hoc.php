@@ -16,10 +16,12 @@ class MonHoc extends Migration
         Schema::create('MonHoc', function (Blueprint $table) {
             $table->string('idMH', 20)->primary();
             $table->string('tenMH');
-            $table->string('idHK');
-            $table->foreign('idHK')->references('idHK')->on('HocKy');
             $table->string('idCN');
             $table->foreign('idCN')->references('idCN')->on('ChuyenNganh');
+            $table->unsignedBigInteger('idNH');
+            $table->foreign('idNH')->references('id')->on('NamHoc');
+            $table->string('idL');
+            $table->foreign('idL')->references('idL')->on('Lop');
         });
     }
 

@@ -22,8 +22,6 @@ class SinhVien extends Migration
             $table->string('idL');
             $table->foreign('idL')->references('idL')->on('Lop');
             $table->string('queQuan');
-            $table->string('idCN');
-            $table->foreign('idCN')->references('idCN')->on('ChuyenNganh');
             $table->string('passWord');
         });
     }

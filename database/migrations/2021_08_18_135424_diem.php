@@ -16,14 +16,14 @@ class Diem extends Migration
         Schema::create('Diem', function (Blueprint $table) {
             $table->string('idSV');
             $table->string('idMH');
-            $table->string('idHK');
+            $table->unsignedBigInteger('idNH');
+            $table->foreign('idNH')->references('id')->on('NamHoc');
             $table->foreign('idSV')->references('idSV')->on('SinhVien');
             $table->foreign('idMH')->references('idMH')->on('MonHoc');
-            $table->foreign('idHK')->references('idHK')->on('HocKy');
-            $table->double('LyThuyet1');
-            $table->double('LyThuyet2');
-            $table->double('ThucHanh1');
-            $table->double('ThucHanh2');
+            $table->double('LyThuyet');
+            $table->double('ThucHanh');
+            $table->double('ThiLaiLyThuyet');
+            $table->double('ThiLaiThucHanh');
         });
     }
 

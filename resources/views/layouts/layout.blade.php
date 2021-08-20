@@ -36,10 +36,10 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-minimize">
-                        <button id="minimizeSidebar" class="btn btn-warning btn-fill btn-round btn-icon">
+                        {{-- <button id="minimizeSidebar" class="btn btn-warning btn-fill btn-round btn-icon">
                             <i class="fa fa-ellipsis-v visible-on-sidebar-regular"></i>
                             <i class="fa fa-navicon visible-on-sidebar-mini"></i>
-                        </button>
+                        </button> --}}
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse">
@@ -48,36 +48,26 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Dashboard PRO</a>
+                        <a class="navbar-brand" href="{{ route('dashboard') }}">Trang chủ</a>
                     </div>
                     <div class="collapse navbar-collapse">
-
-
-
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="charts.html">
-                                    <i class="fa fa-line-chart"></i>
-                                    <p>Stats</p>
-                                </a>
-                            </li>
-
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-gavel"></i>
                                     <p class="hidden-md hidden-lg">
                                         Actions
                                         <b class="caret"></b>
                                     </p>
-                                </a>
-                                <ul class="dropdown-menu">
+                                </a> --}}
+                                {{-- <ul class="dropdown-menu">
                                     <li><a href="#">Create New Post</a></li>
                                     <li><a href="#">Manage Something</a></li>
                                     <li><a href="#">Do Nothing</a></li>
                                     <li><a href="#">Submit to live</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Another Action</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
 
                             <li class="dropdown">
@@ -107,27 +97,13 @@
                                     </p>
                                 </a>
                                 <ul class="dropdown-menu dropdown-with-icons">
-                                    {{-- <li>
-                                        <a href="#">
-                                            <i class="pe-7s-mail"></i> Messages
-                                        </a>
-                                    </li> --}}
                                     <li>
-                                        <a href="#">
+                                        <a href=""
+                                            onclick="return confirm('Vui lòng liên hệ bên kỹ thuật để sử lý nhanh nhất')">
                                             <i class="pe-7s-help1"></i> Trợ giúp
                                         </a>
                                     </li>
-                                    {{-- <li>
-                                        <a href="#">
-                                            <i class="pe-7s-tools"></i> Settings
-                                        </a>
-                                    </li> --}}
                                     <li class="divider"></li>
-                                    {{-- <li>
-                                        <a href="#">
-                                            <i class="pe-7s-lock"></i> Lock Screen
-                                        </a>
-                                    </li> --}}
                                     <li>
                                         <a href="{{ route('logout') }}" class="text-danger">
                                             <i class="pe-7s-close-circle"></i>
@@ -169,8 +145,8 @@
 <!--  Charts Plugin -->
 <script src="{{ asset('assets') }}/js/chartist.min.js"></script>
 
-<!--  Notifications Plugin    -->
-<script src="{{ asset('assets') }}/js/bootstrap-notify.js"></script>
+{{-- <!--  Notifications Plugin    -->
+<script src="{{ asset('assets') }}/js/bootstrap-notify.js"></script> --}}
 
 <!-- Sweet Alert 2 plugin -->
 <script src="{{ asset('assets') }}/js/sweetalert2.js"></script>
@@ -206,14 +182,14 @@
         demo.initDashboardPageCharts();
         demo.initVectorMap();
 
-        $.notify({
-            icon: 'pe-7s-bell',
-            message: "<b>Light Bootstrap Dashboard PRO</b> - forget about boring dashboards."
+        // $.notify({
+        //     icon: 'pe-7s-bell',
+        //     message: "<b>Light Bootstrap Dashboard PRO</b> - forget about boring dashboards."
 
-        }, {
-            type: 'warning',
-            timer: 4000
-        });
+        // }, {
+        //     type: 'warning',
+        //     timer: 4000
+        // });
 
     });
 </script>

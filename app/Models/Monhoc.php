@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Giaovu extends Model
+class Monhoc extends Model
 {
-    protected $table = 'giaovu';
+    protected $table = 'monhoc';
     public $timestamps = false;
 }

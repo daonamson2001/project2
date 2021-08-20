@@ -19,9 +19,7 @@
                                 <th>Mã lớp</th>
                                 <th>Tên lớp</th>
                                 <th>Chuyên ngành</th>
-                                <th>Xem</th>
-                                <th>Sửa</th>
-                                <th>Ẩn</th>
+                                <th colspan="3" style="text-align: center">Hành động</th>
                             </thead>
                             <tbody>
                                 <?php foreach ($class as $lop): ?>
@@ -29,15 +27,29 @@
                                     <td>{{ $lop->idL }}</td>
                                     <td>{{ $lop->tenLop }}</td>
                                     <td>{{ $lop->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}</td>
-                                    <td><a href="{{ route('class.show', $lop->idL) }}">Xem</a></td>
-                                    <td><a href="{{ route('class.edit', $lop->idL) }}">Sửa</a></td>
+                                    <td><a href="{{ route('class.show', $lop->idL) }}" rel="tooltip" title="Thông tin lớp"
+                                            class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-user"></i>
+                                        </a>
+                                    </td>
                                     <td>
-                                        <a href="{{ route('class.hide', $lop->tenLop) }}">Ẩn</a>
-                                        {{-- <form action="{{ route('class.destroy', $lop->idL) }}" method="post">
-                                            @csrf
-                                            @method("DELETE")
-                                            <button>Ẩn</button>
-                                        </form> --}}
+                                        <a href="{{ route('diem.show', $lop->idL) }}" rel="tooltip" title="Điểm lớp"
+                                            class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-magic"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('class.edit', $lop->idL) }}" rel="tooltip" title="Sửa lớp"
+                                            class="btn btn-success btn-simple btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('class.hide', $lop->tenLop) }}" rel="tooltip" title="Ẩn lớp"
+                                            class="btn btn-danger btn-simple btn-xs"
+                                            onclick="return confirm('Bạn có chắc muốn ẩn lớp này ?')">
+                                            <i class="fa fa-times"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -45,10 +57,10 @@
                         </table>
                         {{ $class->appends(['search' => '$search'])->links('pagination::bootstrap-4') }}
                     </div><!--  end card  -->
-                    <a href="{{ route('class.create') }}">Them</a>
+                    <a href="{{ route('class.create') }}"><button type="submit" class="btn btn-fill btn-info">Thêm
+                            lớp</button></a>
                 </div> <!-- end col-md-12 -->
             </div> <!-- end row -->
         </div>
-    </div><!--   Core JS Files  -->
-
+    </div>
 @endsection

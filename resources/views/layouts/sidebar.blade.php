@@ -5,35 +5,39 @@
         Tip 2: you can also add an image using data-image tag
 
     -->
-
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-            Ct
-        </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            Creative Tim
-        </a>
     </div>
 
     <div class="sidebar-wrapper">
+        <div class="user">
+            <div class="info text-center">
+                <span>
+                    <font color="black">
+                        <h5>
+                            {{ Session::get('gioiTinh') }}&nbsp;{{ Session::get('tenGV') }}
+                        </h5>
+                    </font>
+                </span>
+            </div>
+        </div>
         <ul class="nav">
-            <li class="active">
+            <li>
                 <a href="{{ route('class.index') }}">
-                    <i class="pe-7s-graph"></i>
+                    <i class="pe-7s-users"></i>
                     <p>Danh sách lớp</p>
                 </a>
             </li>
             <li>
-                <a href="charts.html">
+                <a href="{{ route('student.index') }}">
                     <i class="pe-7s-graph1"></i>
-                    <p>Charts</p>
+                    <p>Danh sách sinh viên</p>
                 </a>
             </li>
 
             <li>
-                <a href="calendar.html">
+                <a href="{{ route('calendar') }}">
                     <i class="pe-7s-date"></i>
-                    <p>Calendar</p>
+                    <p>Lịch công tác</p>
                 </a>
             </li>
         </ul>
