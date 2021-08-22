@@ -18,7 +18,8 @@ class DiemController extends Controller
      */
     public function index(Request $request)
     {
-        //
+
+        return view('diem.index');
     }
 
     /**
@@ -26,7 +27,7 @@ class DiemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request, $idL, $idNH)
     {
         $idL = $request->get('idL');
         $class = Lop::all();
@@ -52,10 +53,7 @@ class DiemController extends Controller
      */
     public function show($id, Request $request)
     {
-        $search = $request->get('search');
-        $student = Student::join('diem', 'sinhvien.idSV', '=', 'diem.idSV')->select('*')->where('sinhvien.idL', '=', $id)->where('tenSV', 'LIKE', "%$search%")->paginate(10);
-        $class = Monhoc::all();
-        return view('diem.show', ['search' => $search, 'student' => $student, 'idL' => $id, 'class' => $class,]);
+        //
     }
 
     /**
@@ -89,5 +87,26 @@ class DiemController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function diemlop($idL, $tenMH, Request $request, $idMH)
+    {
+        $search = $request->get('search');
+        $monhoc = Diem::join('sinhvien', 'diem.idSV', '=', 'sinhvien.idSV')
+            ->join('monhoc', 'diem.idMH', '=', 'monhoc.idMH')
+            ->select('*')
+            ->where('sinhvien.idL', '=', $idL)
+            ->where('monhoc.idMH', '=', $idMH)
+            ->where('tenSV', 'LIKE', "%$search%")->paginate(10);
+        return view('diem.diemlop', ['tenMH' => $tenMH, 'idL' => $idL, 'search' => $search, 'idMH' => $idMH, 'monhoc' => $monhoc,]);
+    }
+    public function diemsinhvien($idL, $tenSV, $idSV, Request $request)
+    {
+        $search = $request->get('search');
+        $diem = Diem::join('sinhvien', 'diem.idSV', '=', 'sinhvien.idSV')
+            ->join('monhoc', 'diem.idMH', '=', 'monhoc.idMH')
+            ->select('*')
+            ->where('diem.idSV', '=', $idSV)
+            ->where('tenSV', 'LIKE', "%$search%")->paginate(10);
+        return view('diem.diemsinhvien', ['tenSV' => $tenSV, 'idL' => $idL, 'search' => $search, 'idSV' => $idSV, 'diem' => $diem,]);
     }
 }

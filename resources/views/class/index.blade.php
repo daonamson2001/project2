@@ -1,3 +1,10 @@
+<style>
+    #hihi:hover {
+        color: black;
+        background: white;
+    }
+
+</style>
 @extends('layouts.layout')
 @section('main')
     <div class="main-content">
@@ -33,7 +40,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('diem.show', $lop->idL) }}" rel="tooltip" title="Điểm lớp"
+                                        <a href="{{ route('monhoc.show', $lop->idL) }}" rel="tooltip" title="Môn học"
                                             class="btn btn-info btn-simple btn-xs">
                                             <i class="fa fa-magic"></i>
                                         </a>
@@ -57,7 +64,8 @@
                         </table>
                         {{ $class->appends(['search' => '$search'])->links('pagination::bootstrap-4') }}
                     </div><!--  end card  -->
-                    <a href="{{ route('class.create') }}"><button type="submit" class="btn btn-fill btn-info">Thêm
+                    <a href="{{ route('class.create') }}"><button type="submit" class="btn btn-fill btn-info"
+                            id="hihi">Thêm
                             lớp</button></a>
                 </div> <!-- end col-md-12 -->
             </div> <!-- end row -->

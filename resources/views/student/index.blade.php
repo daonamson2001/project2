@@ -45,7 +45,7 @@
                                     <td>{{ $sinhvien->ngaySinh }}</td>
                                     <td>{{ $sinhvien->queQuan }}</td>
                                     <td>{{ $sinhvien->tenLop }}</td>
-                                    <td><a href="#" rel="tooltip" title="Điểm sinh viên"
+                                    <td><a href="" rel="tooltip" title="Điểm sinh viên"
                                             class="btn btn-info btn-simple btn-xs">
                                             <i class="fa fa-magic"></i>
                                         </a>

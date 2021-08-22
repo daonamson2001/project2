@@ -10,15 +10,12 @@
         <h1>Danh sách sinh viên</h1>
         <div class="container-fluid">
             <div class="row">
-
                 <h3>&ensp;Lớp: {{ $idL }}</h3>
-
                 <div class="col-md-12">
                     <div class="card">
                         <table class="table table-hover table-striped">
                             <thead>
                                 <?php $dem = 1; ?>
-                                <?php $nd = 'Hiện lớp đang trống, hãy thêm sinh viên'; ?>
                                 <th>STT</th>
                                 <th>Mã sinh viên</th>
                                 <th>Tên sinh viên</th>
@@ -32,12 +29,11 @@
                             </thead>
 
                             <tbody>
+                                <?php $result = 0; ?>
                                 <?php foreach ($student as $sinhvien): ?>
+                                <?php $result = count($student); ?>
                                 <tr>
                                     <td>&ensp;{{ $dem++ }}</td>
-                                    @if ($sinhvien->tenSV == '')
-                                        {{ $nd }}
-                                    @endif
                                     <td>{{ $sinhvien->idSV }}</td>
                                     <td>{{ $sinhvien->tenSV }}</td>
                                     <td>{{ $sinhvien->email }}</td>
@@ -47,8 +43,8 @@
                                     <td>{{ $sinhvien->queQuan }}</td>
                                     {{-- <td>{{ $sinhvien->tenLop }}</td> --}}
                                     <td>{{ $sinhvien->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}</td>
-                                    <td><a href="#" rel="tooltip" title="Điểm sinh viên"
-                                            class="btn btn-info btn-simple btn-xs">
+                                    <td><a href="{{ route('diemsinhvien', [$sinhvien->idL, $sinhvien->tenSV, $sinhvien->idSV]) }}"
+                                            rel="tooltip" title="Điểm sinh viên" class="btn btn-info btn-simple btn-xs">
                                             <i class="fa fa-magic"></i>
                                         </a>
                                     </td>
@@ -70,12 +66,20 @@
                                             </button>
                                         </form>
                                     </td>
+                                    {{-- @endif --}}
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
                         {{ $student->appends(['search' => '$search'])->links('pagination::bootstrap-4') }}
                     </div>
+                    <div style="color:red; position: relative; font-size:18px">
+                        <?php $nd = 'Hiện lớp đang trống, hãy thêm sinh viên'; ?>
+                        @if ($result == 0)
+                            {{ $nd }}
+                        @endif
+                    </div>
+                    </br>
                     <a href="{{ route('student.create', ['idL' => $idL]) }}"><button type="submit"
                             class="btn btn-fill btn-info">Thêm sinh viên</button></a>
                 </div> <!-- end col-md-12 -->

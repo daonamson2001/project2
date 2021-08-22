@@ -1,3 +1,10 @@
+<style>
+    #hihi:hover {
+        color: black;
+        background: white;
+    }
+
+</style>
 @extends('layouts.layout')
 @section('main')
     <div class="main-content">
@@ -17,7 +24,9 @@
                             value="{{ $class->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}" readonly
                             class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-fill btn-info">Cập nhập</button>
+                    <button type="submit" class="btn btn-fill btn-info" onclick="return confirm='Cập nhập thành công !'"
+                        id="hihi">Cập
+                        nhập</button>
                 </form>
             </div>
         </div>

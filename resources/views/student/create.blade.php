@@ -1,3 +1,10 @@
+<style>
+    #hihi:hover {
+        color: black;
+        background: white;
+    }
+
+</style>
 @extends('layouts.layout')
 @section('main')
     <div class="main-content">
@@ -43,7 +50,8 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-fill btn-info">Thêm</button>
+                    <button type="submit" class="btn btn-fill btn-info"
+                        onclick="return confirm('Thêm sinh viên thành công !')" id="hihi">Thêm</button>
                 </form>
             </div>
         </div>

@@ -1,3 +1,10 @@
+<style>
+    #hihi:hover {
+        color: black;
+        background: white;
+    }
+
+</style>
 @extends('layouts.layout')
 @section('main')
     <div class="main-content">
@@ -21,8 +28,8 @@
                             <option value="2">Quản trị mạng</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-fill btn-info" return
-                        onclick="Thêm sinh viên thành công">Thêm</button>
+                    <button type="submit" class="btn btn-fill btn-info" onclick="return confirm='Thêm sinh viên thành công'"
+                        #id="hihi">Thêm</button>
                 </form>
             </div>
         </div>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lop;
 use App\Models\Monhoc;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class MonhocController extends Controller
@@ -12,7 +14,7 @@ class MonhocController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
     }
@@ -26,7 +28,8 @@ class MonhocController extends Controller
     {
         $idL = $request->get('idL');
         $monhoc = Monhoc::all();
-        return view('diem.create', ['idL' => $idL, 'monhoc' => $monhoc]);
+        $class = Lop::all();
+        return view('monhoc.create', ['idL' => $idL, 'monhoc' => $monhoc, 'class' => $class]);
     }
 
     /**
@@ -37,7 +40,20 @@ class MonhocController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $idMH = $request->get('idMH');
+        $tenMH = $request->get('tenMH');
+        $idCN = $request->get('idCN');
+        $idNH = $request->get('idNH');
+        $idL = $request->get('idL');
+
+        $monhoc = new Monhoc();
+        $monhoc->idMH = $idMH;
+        $monhoc->idNH = $idNH;
+        $monhoc->idL = $idL;
+        $monhoc->idCN = $idCN;
+        $monhoc->tenMH = $tenMH;
+        $monhoc->save();
+        return redirect(route('monhoc.show'));
     }
 
     /**
@@ -46,9 +62,14 @@ class MonhocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        $idMH = $request->get('idMH');
+        $tenMH = $request->get('tenMH');
+        $search = $request->get('search');
+        $student = Student::join('diem', 'sinhvien.idSV', '=', 'diem.idSV')->select('*')->where('sinhvien.idL', '=', $id)->where('tenSV', 'LIKE', "%$search%")->paginate(10);
+        $class = Monhoc::all();
+        return view('monhoc.show', ['search' => $search, 'student' => $student, 'idL' => $id, 'class' => $class, 'tenMH' => $tenMH, 'idMH' => $idMH]);
     }
 
     /**
