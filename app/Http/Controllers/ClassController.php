@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Lop;
 use App\Models\Student;
@@ -18,7 +19,13 @@ class ClassController extends Controller
     {
         $search = $request->get('search');
         $class = Lop::where('tenLop', 'LIKE', "%$search%")->paginate(10);
-        return view('class.index', ["class" => $class, "search" => $search,]);
+        Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+        $dt = Carbon::create(2018, 10, 18, 14, 40, 16);
+        $dt2 = Carbon::create(2018, 10, 18, 13, 40, 16);
+        $now = Carbon::now();
+        $dt->diffForHumans($now); //12 phút trước
+        $dt2->diffForHumans($now); //1 giờ trước
+        return view('class.index', ["class" => $class, "search" => $search, 'dt' => $dt]);
     }
 
     /**

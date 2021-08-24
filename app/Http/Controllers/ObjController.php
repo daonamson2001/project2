@@ -58,4 +58,13 @@ class ObjController extends Controller
         $class = Monhoc::all();
         return view('monhoc.showmonhoc', ['search' => $search, 'student' => $student, 'idL' => $idL, 'class' => $class, 'tenMH' => $tenMH, 'idMH' => $idMH]);
     }
+    public function deletemonhoc($idMH, $idL)
+    {
+        $monhoc = Monhoc::where('idMH', $idMH);
+        $monhoc->delete();
+        return redirect()->route('showmonhoc', ['idL' => $idL]);
+        // // dd($idMH);
+        // // dd($monhoc);
+        // dd($idL);
+    }
 }

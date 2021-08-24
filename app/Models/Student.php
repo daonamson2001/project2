@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     protected $table = 'sinhvien';
-
+    protected $fillable = ["idSV", "tenSV", "email", "gioiTinh", "ngaySinh", "idL", "queQuan", "passWord"];
     public $timestamps = false;
     //Bắt đầu bắt get, kết thúc bằng attribute
     public function getGenderNameAttribute()

@@ -82,6 +82,10 @@
                     </br>
                     <a href="{{ route('student.create', ['idL' => $idL]) }}"><button type="submit"
                             class="btn btn-fill btn-info">Thêm sinh viên</button></a>
+                    <a href="{{ route('student.insertByExcel') }}"><button type="submit" class="btn btn-fill btn-info"
+                            id="hihi">Thêm excel</button></a>
+                    <a href="{{ route('student.export') }}"><button type="submit" class="btn btn-fill btn-info">Tải danh
+                            sách sinh viên</button></a>
                 </div> <!-- end col-md-12 -->
             </div>
         </div>

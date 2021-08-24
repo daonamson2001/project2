@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StudentsExport;
+use App\Imports\StudentsImport;
 use App\Models\Lop;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -131,5 +134,17 @@ class StudentController extends Controller
     }
     public function hide($id)
     {
+    }
+    public function insertByExcel()
+    {
+        return view('student.insertByExcel');
+    }
+    public function insertByExcelprocess(Request $request)
+    {
+        Excel::import(new StudentsImport, $request->file('excel'));
+    }
+    public function export()
+    {
+        return Excel::download(new StudentsExport, 'Students.xlsx');
     }
 }

@@ -1,3 +1,23 @@
+<style>
+    #hihi {
+        position: relative;
+        float: right;
+        background: #FAF0E6;
+        top: -53px;
+        padding: 5px 20px;
+        border: 2px solid pink;
+        transition: 0.6s ease;
+        color: black !important;
+    }
+
+    #hihi:hover {
+        background-color: #F5F5F5;
+        border: 2px solid #F5F5F5;
+        color: hotpink !important;
+        transition: 1s ease;
+    }
+
+</style>
 @extends('layouts.layout')
 @section('main')
     <div class="main-content">
@@ -8,14 +28,23 @@
             </div>
         </form>
         <h2>Môn: {{ $tenMH }}</h2>
-
         <a href="{{ route('editmonhoc', [$idMH, $tenMH]) }}"><button type="submit" class="btn btn-fill btn-info"
                 id="hihi">Sửa môn
                 học</button>
         </a>
+        <div style="float: right; color:#F5F5F5">|</div>
+        <form action="{{ route('deletemonhoc', [$idMH, $idL]) }}" method="post">
+            {{-- @method("DELETE") --}}
+            @method("PUT")
+            @csrf
+            <button type="submit" class="btn btn-fill btn-info" id="hihi"
+                onclick="return confirm('Bạn có chắc muốn xóa môn học này ?')">
+                Xóa môn học
+            </button>
+        </form>
         {{-- <a href="{{ route('monhoc.destroy') }}"><button type="submit" class="btn btn-fill btn-info" id="hihi">Xóa môn
                 học</button></a> --}}
-        <table class="table table-hover table-striped">
+        <table class=" table table-hover table-striped">
             <thead>
                 <?php $dem = 1; ?>
                 <th>STT</th>
@@ -131,7 +160,7 @@
             @endif
         </div>
         </br>
-        <a href="{{ route('indexdiem') }}"><button type="submit" class="btn btn-fill btn-info" id="hihi">Thêm
+        <a href="{{ route('indexdiem') }}"><button type="submit" class="btn btn-fill btn-info">Thêm
                 điểm</button></a>
     </div>
 @endsection

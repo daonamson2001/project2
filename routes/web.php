@@ -3,6 +3,7 @@
 use App\Http\Controllers\DiemController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ObjController;
+use App\Http\Controllers\StudentController;
 use App\Mail\AppMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -25,34 +26,31 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware([CheckLogin::class])->group(function () {
 
     //điểm
-    // Route::get('/diem/create', [DiemController::class, 'create'])->name('create');
-    // Route::PATCH('/store', [DiemController::class, 'store'])->name('store');
-    // Route::get('/diem/index', [DiemController::class, 'index'])->name('index');
-    // Route::get('/edit', [DiemController::class, 'edit'])->name('edit');
-    // Route::PATCH('/update', [DiemController::class, 'update'])->name('update');
-    // Route::get('/show', [DiemController::class, 'show'])->name('show');
-    //
-    // Route::prefix('diem')->name('diem.')->group(function () {
     Route::get('diem/{idL}/{tenMH}/{idMH}', [DiemController::class, 'diemlop'])->name('diemlop');
     Route::get('diemsinhvien/{idL}/{tenSV}/{idSV}', [DiemController::class, 'diemsinhvien'])->name('diemsinhvien');
     Route::get('diem/themdiem', [DiemController::class, 'indexdiem'])->name('indexdiem');
-    // });
 
+    //môn học
     Route::get('monhoc/{idMH}/{tenMH}', [ObjController::class, 'editmonhoc'])->name('editmonhoc');
     Route::PUT('store', [ObjController::class, 'store'])->name('store');
     Route::PUT('update/{idMH}', [ObjController::class, 'updatemonhoc'])->name('updatemonhoc');
     Route::get('show/{idL}', [ObjController::class, 'showmonhoc'])->name('showmonhoc');
     Route::get('create/{idL}', [ObjController::class, 'createmonhoc'])->name('createmonhoc');
+    Route::PUT('delete/{idMH}/{idL}', [ObjController::class, 'deletemonhoc'])->name('deletemonhoc');
+
     //trang chủ
     Route::get('/home', function () {
         return view('dashboard');
     })->name('dashboard');
 
     //sinhvien
-    Route::resource('student', StudentController::class);
     Route::prefix('student')->name('student.')->group(function () {
         Route::get('{tenSV}/hide', [StudentController::class, 'hide'])->name('hide');
+        Route::get('/insert-by-excel', [StudentController::class, 'insertByExcel'])->name('insertByExcel');
+        Route::post('/insert-by-excel-process', [StudentController::class, 'insertByExcelprocess'])->name('insertByExcelprocess');
+        Route::get('/export', [StudentController::class, 'export'])->name('export');
     });
+    Route::resource('student', StudentController::class);
 
     //lớp
     Route::resource('class', ClassController::class);
@@ -70,6 +68,4 @@ Route::middleware([CheckLogin::class])->group(function () {
     Route::get('/calendar', function () {
         return view('calendar');
     })->name('calendar');
-    //
-
 });
