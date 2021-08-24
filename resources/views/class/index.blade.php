@@ -40,7 +40,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('monhoc.show', $lop->idL) }}" rel="tooltip" title="Môn học"
+                                        <a href="{{ route('showmonhoc', [$lop->idL]) }}" rel="tooltip" title="Môn học"
                                             class="btn btn-info btn-simple btn-xs">
                                             <i class="fa fa-magic"></i>
                                         </a>

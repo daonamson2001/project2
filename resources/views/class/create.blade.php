@@ -11,7 +11,7 @@
         <div class="card">
             <div class="header">Thêm lớp</div>
             <div class="content">
-                <form method="post" action="{{ route('class.store') }}">
+                <form method="post" action="{{ route('store') }}">
                     @csrf
                     <div class="form-group">
                         <label>Mã lớp</label>

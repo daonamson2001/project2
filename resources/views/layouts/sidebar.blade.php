@@ -28,9 +28,9 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('student.index') }}">
+                <a href="{{ route('indexdiem') }}">
                     <i class="pe-7s-graph1"></i>
-                    <p>Danh sách sinh viên</p>
+                    <p>Thêm điểm</p>
                 </a>
             </li>
 

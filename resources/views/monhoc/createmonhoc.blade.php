@@ -11,7 +11,8 @@
         <div class="card">
             <div class="header">Thêm môn học</div>
             <div class="content">
-                <form method="post" action="{{ route('monhoc.store') }}">
+                <form method="post" action="{{ route('store') }}">
+                    @method("PUT")
                     @csrf
                     <div class="form-group">
                         <label>Mã môn học</label>
@@ -38,11 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label>Tên lớp</label>
-                        <select class="form-control" name="idL">
-                            @foreach ($monhoc as $lop)
-                                <option value="{{ $lop->idL }}" @if ($lop->idL == $idL) selected @endif>{{ $lop->idL }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" name="idL" value="{{ $idL }}" class="form-control" readonly>
                     </div>
                     <button type="submit" class="btn btn-fill btn-info" onclick="return confirm('Thêm môn học thành công')"
                         id="hihi">

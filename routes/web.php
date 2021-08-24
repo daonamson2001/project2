@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DiemController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ObjController;
 use App\Mail\AppMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -31,16 +32,17 @@ Route::middleware([CheckLogin::class])->group(function () {
     // Route::PATCH('/update', [DiemController::class, 'update'])->name('update');
     // Route::get('/show', [DiemController::class, 'show'])->name('show');
     //
-    Route::resource('diem', DiemController::class);
+    // Route::prefix('diem')->name('diem.')->group(function () {
     Route::get('diem/{idL}/{tenMH}/{idMH}', [DiemController::class, 'diemlop'])->name('diemlop');
     Route::get('diemsinhvien/{idL}/{tenSV}/{idSV}', [DiemController::class, 'diemsinhvien'])->name('diemsinhvien');
-    Route::get('diem/{idL}/{idNH}', [DiemController::class, 'create'])->name('create');
-    // Route::prefix('diem')->name('diem.')->group(function () {
-    //     // Route::get('{tenLop}/', [DiemCotroller::class, 'hide'])->name('hide');
-    //     Route::get('{idL}/{tenMH}/index', [Diem1Cotroller::class, 'index'])->name('index');
-    //     Route::get('{tenLop}/{tenMH}/show', [Diem1Cotroller::class, 'show'])->name('show');
+    Route::get('diem/themdiem', [DiemController::class, 'indexdiem'])->name('indexdiem');
     // });
-    Route::resource('monhoc', MonhocController::class);
+
+    Route::get('monhoc/{idMH}/{tenMH}', [ObjController::class, 'editmonhoc'])->name('editmonhoc');
+    Route::PUT('store', [ObjController::class, 'store'])->name('store');
+    Route::PUT('update/{idMH}', [ObjController::class, 'updatemonhoc'])->name('updatemonhoc');
+    Route::get('show/{idL}', [ObjController::class, 'showmonhoc'])->name('showmonhoc');
+    Route::get('create/{idL}', [ObjController::class, 'createmonhoc'])->name('createmonhoc');
     //trang chủ
     Route::get('/home', function () {
         return view('dashboard');

@@ -8,6 +8,13 @@
             </div>
         </form>
         <h2>Môn: {{ $tenMH }}</h2>
+
+        <a href="{{ route('editmonhoc', [$idMH, $tenMH]) }}"><button type="submit" class="btn btn-fill btn-info"
+                id="hihi">Sửa môn
+                học</button>
+        </a>
+        {{-- <a href="{{ route('monhoc.destroy') }}"><button type="submit" class="btn btn-fill btn-info" id="hihi">Xóa môn
+                học</button></a> --}}
         <table class="table table-hover table-striped">
             <thead>
                 <?php $dem = 1; ?>
@@ -124,11 +131,7 @@
             @endif
         </div>
         </br>
-        {{-- @foreach ($monhoc as $item)
-            <a href="{{ route('create', [$item->idL, $item->idNH]) }}"><button type="submit" class="btn btn-fill btn-info"
-                    id="hihi">Thêm
-                    điểm</button></a>
-        @endforeach --}}
-
+        <a href="{{ route('indexdiem') }}"><button type="submit" class="btn btn-fill btn-info" id="hihi">Thêm
+                điểm</button></a>
     </div>
 @endsection

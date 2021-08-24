@@ -55,7 +55,7 @@
                     </br>
                     </br>
                     </br>
-                    <a href="{{ route('monhoc.create', ['idL' => $idL]) }}"><button type="submit"
+                    <a href="{{ route('createmonhoc', ['idL' => $idL]) }}"><button type="submit"
                             class="btn btn-fill btn-info" id="hihi">Thêm
                             môn học</button></a>
                 </div>
@@ -84,7 +84,7 @@
                     </br>
                     </br>
                     </br>
-                    <a href="{{ route('monhoc.create', ['idL' => $idL]) }}"><button type="submit"
+                    <a href="{{ route('createmonhoc', ['idL' => $idL]) }}"><button type="submit"
                             class="btn btn-fill btn-info" id="hihi">Thêm
                             môn học</button></a>
                 </div>
@@ -113,7 +113,7 @@
                     </br>
                     </br>
                     </br>
-                    <a href="{{ route('monhoc.create', ['idL' => $idL]) }}"><button type="submit"
+                    <a href="{{ route('createmonhoc', ['idL' => $idL]) }}"><button type="submit"
                             class="btn btn-fill btn-info" id="hihi">Thêm
                             môn học</button></a>
                 </div>
