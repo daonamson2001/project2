@@ -9,7 +9,7 @@
                     @csrf
                     <div class="form-group">
                         <label>Tên môn học</label>
-                        <input type="text" name="tenMH" value="{{ $monhoc->tenMH }}" class="form-control">
+                        <input type="text" name="tenMH" value="{{ $monhoc->tenMH }}" class="form-control" required="true">
                     </div>
                     <div class="form-group">
                         <label>Năm học</label>
@@ -26,7 +26,7 @@
                             class="form-control">
                     </div>
                     <button type="submit" class="btn btn-fill btn-info" onclick="return confirm('Cập nhập thành công !')"
-                        id="hihi">Cậpnhập</button>
+                        id="hihi">Cập nhập</button>
                 </form>
             </div>
         </div>

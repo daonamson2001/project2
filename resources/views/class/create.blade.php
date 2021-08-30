@@ -1,25 +1,19 @@
-<style>
-    #hihi:hover {
-        color: black;
-        background: white;
-    }
-
-</style>
 @extends('layouts.layout')
 @section('main')
     <div class="main-content">
         <div class="card">
             <div class="header">Thêm lớp</div>
             <div class="content">
-                <form method="post" action="{{ route('store') }}">
+                <form method="post" action="{{ route('class.store') }}">
                     @csrf
                     <div class="form-group">
                         <label>Mã lớp</label>
-                        <input type="text" name="idL" class="form-control" required="true">
+                        <input type="text" name="idL" class="form-control" required="true" placeholder="Nhập giống tên lớp">
                     </div>
                     <div class="form-group">
                         <label>Tên lớp</label>
-                        <input type="text" name="tenLop" class="form-control" required="true">
+                        <input type="text" name="tenLop" class="form-control" required="true"
+                            placeholder="Nhập giống mã lớp">
                     </div>
                     <div class="form-group">
                         <label>Mã chuyên ngành</label>
@@ -28,8 +22,8 @@
                             <option value="2">Quản trị mạng</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-fill btn-info" onclick="return confirm='Thêm sinh viên thành công'"
-                        #id="hihi">Thêm</button>
+                    <button type="submit" class="btn btn-fill btn-info"
+                        onclick="return confirm('Thêm lớp thành công')">Thêm</button>
                 </form>
             </div>
         </div>

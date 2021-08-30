@@ -6,45 +6,19 @@ use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
 use App\Models\Lop;
 use App\Models\Student;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        $search = $request->get('search');
-        $idL = $request->get('idL');
-        $student = Student::where('tenSV', 'LIKE', "%$search%")->where("idL", $idL)->paginate(10);
-        // $student = DB::table('sinhvien')->join('lop', 'sinhvien.idL', '=', 'lop.idL')->select('*')->get();
-        $class = Lop::all();
-        return view('student.index', ["student" => $student, "search" => $search, "class" => $class, "idL" => $idL]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
+    public function create(Request $request, $idL)
     {
         $idL = $request->get('idL');
         $class = Lop::all();
         return view('student.create', ["class" => $class, "idL" => $idL]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $idSV = $request->get('idSV');
@@ -66,41 +40,25 @@ class StudentController extends Controller
         $student->queQuan = $queQuan;
         $student->idL = $idL;
         $student->save();
-        return redirect(route('student.index'));
+        return redirect()->route('class.show', ['class' => $idL]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $student = Student::all();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit($idSV, $idL)
     {
+        // dd($idSV);
         $class = Lop::all();
-        $student = Student::where('idSV', '=', $id)->first();
-        return view('student.edit', ["student" => $student, "class" => $class]);
+        $student = Student::where('idSV', '=', $idSV)->first();
+        return view('student.edit', ["student" => $student, "class" => $class, "idL" => $idL, 'idSV' => $idSV]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, $idSV, $idL)
     {
         $tenSV = $request->get('tenSV');
         $email = $request->get('email');
@@ -109,31 +67,24 @@ class StudentController extends Controller
         $ngaySinh = $request->get('ngaySinh');
         $queQuan = $request->get('queQuan');
 
-        Student::where('idSV', $id)->update([
+        Student::where('idSV', $idSV)->update([
             "tenSV" => $tenSV,
             "email" => $email,
             "passWord" => $password,
-            "gioiTinh" => $gioiTinh,
+            "gioiTinh" => $gioiTinh == "Nam" ? 1 : 0,
             "ngaySinh" => $ngaySinh,
             "queQuan" => $queQuan,
         ]);
-        return redirect(route('student.index'));
+        return redirect()->route('class.show', ['class' => $idL]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy($idSV, $idL)
     {
-        $student = Student::where('idSV', $id);
+        Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+        $student = Student::where('idSV', $idSV);
         $student->delete();
-        return redirect(route('student.index'));
-    }
-    public function hide($id)
-    {
+        return redirect()->route('class.show', ['class' => $idL, "idSV" => $idSV]);
     }
     public function insertByExcel()
     {
@@ -141,7 +92,16 @@ class StudentController extends Controller
     }
     public function insertByExcelprocess(Request $request)
     {
-        Excel::import(new StudentsImport, $request->file('excel'));
+        // Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+        $file = $request->file('excel')->store('import');
+        $import = new StudentsImport;
+        $import->import($file);
+
+        if ($import->failures()->isNotEmpty()) {
+            return redirect()->back()->withFailures($import->failures());
+        }
+        // dd($import->failures());
+        return redirect()->back()->withStatus('Excel file imported successfully !');
     }
     public function export()
     {

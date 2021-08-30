@@ -16,11 +16,11 @@
                     @csrf
                     <div class="form-group">
                         <label>Mã môn học</label>
-                        <input type="text" name="idMH" class="form-control">
+                        <input type="text" name="idMH" class="form-control" required="true">
                     </div>
                     <div class="form-group">
                         <label>Tên môn học</label>
-                        <input type="text" name="tenMH" class="form-control">
+                        <input type="text" name="tenMH" class="form-control" required="true">
                     </div>
                     <div class="form-group">
                         <label>Chuyên ngành</label>

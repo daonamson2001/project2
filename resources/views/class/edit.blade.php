@@ -1,10 +1,3 @@
-<style>
-    #hihi:hover {
-        color: black;
-        background: white;
-    }
-
-</style>
 @extends('layouts.layout')
 @section('main')
     <div class="main-content">
@@ -16,17 +9,17 @@
                     @csrf
                     <div class="form-group">
                         <label>Tên lớp</label>
-                        <input type="text" name="tenLop" value="{{ $class->tenLop }}" class="form-control">
+                        <input type="text" name="tenLop" value="{{ $class->tenLop }}" class="form-control"
+                            required="true">
                     </div>
                     <div class="form-group">
                         <label>Chuyên ngành</label>
                         <input type="text" name="idCN"
-                            value="{{ $class->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}" readonly
-                            class="form-control">
+                            value="{{ $class->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-fill btn-info" onclick="return confirm='Cập nhập thành công !'"
-                        id="hihi">Cập
-                        nhập</button>
+                    <button type="submit" class="btn btn-fill btn-info"
+                        onclick="return confirm('Cập nhập thành công !')">Cập nhập</button>
+
                 </form>
             </div>
         </div>

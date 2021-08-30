@@ -21,47 +21,117 @@
                     <div class="card">
                         <div class="toolbar">
                         </div>
-                        <table class="table table-hover table-striped">
-                            <thead>
-                                <th>Mã lớp</th>
-                                <th>Tên lớp</th>
-                                <th>Chuyên ngành</th>
-                                <th colspan="3" style="text-align: center">Hành động</th>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($class as $lop): ?>
-                                <tr>
-                                    <td>{{ $lop->idL }}</td>
-                                    <td>{{ $lop->tenLop }}</td>
-                                    <td>{{ $lop->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}</td>
-                                    <td><a href="{{ route('class.show', $lop->idL) }}" rel="tooltip" title="Thông tin lớp"
-                                            class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-user"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('showmonhoc', [$lop->idL]) }}" rel="tooltip" title="Môn học"
-                                            class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-magic"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('class.edit', $lop->idL) }}" rel="tooltip" title="Sửa lớp"
-                                            class="btn btn-success btn-simple btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('class.hide', $lop->tenLop) }}" rel="tooltip" title="Ẩn lớp"
-                                            class="btn btn-danger btn-simple btn-xs"
-                                            onclick="return confirm('Bạn có chắc muốn ẩn lớp này ?')">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                        <div class="content">
+
+                            <ul role="tablist" class="nav nav-tabs">
+                                <li role="presentation" class="active">
+                                    <a href="#agency" data-toggle="tab">
+                                        <h5>Lập trình máy tính</h5>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#company" data-toggle="tab">
+                                        <h5>Quản trị mạng</h5>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="agency" class="tab-pane active">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                            <th>Mã lớp</th>
+                                            <th>Tên lớp</th>
+                                            <th>Chuyên ngành</th>
+                                            <th colspan="3" style="text-align: center">Hành động</th>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($class as $lop): ?>
+                                            @if ($lop->idCN == 1)
+                                                <tr>
+                                                    <td>{{ $lop->idL }}</td>
+                                                    <td>{{ $lop->tenLop }}</td>
+                                                    <td>{{ $lop->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}
+                                                    </td>
+                                                    <td><a href="{{ route('class.show', $lop->idL) }}" rel="tooltip"
+                                                            title="Thông tin lớp" class="btn btn-info btn-simple btn-xs">
+                                                            <i class="fa fa-user"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('showmonhoc', [$lop->idL]) }}" rel="tooltip"
+                                                            title="Môn học" class="btn btn-info btn-simple btn-xs">
+                                                            <i class="fa fa-magic"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('class.edit', $lop->idL) }}" rel="tooltip"
+                                                            title="Sửa lớp" class="btn btn-success btn-simple btn-xs">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="" rel="tooltip" title="Ẩn lớp"
+                                                            class="btn btn-danger btn-simple btn-xs"
+                                                            onclick="return confirm('Đang trong quá trình nâng cấp')">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="company" class="tab-pane">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                            <th>Mã lớp</th>
+                                            <th>Tên lớp</th>
+                                            <th>Chuyên ngành</th>
+                                            <th colspan="3" style="text-align: center">Hành động</th>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($class as $lop): ?>
+                                            @if ($lop->idCN == 2)
+                                                <tr>
+                                                    <td>{{ $lop->idL }}</td>
+                                                    <td>{{ $lop->tenLop }}</td>
+                                                    <td>{{ $lop->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}
+                                                    </td>
+                                                    <td><a href="{{ route('class.show', $lop->idL) }}" rel="tooltip"
+                                                            title="Thông tin lớp" class="btn btn-info btn-simple btn-xs">
+                                                            <i class="fa fa-user"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('showmonhoc', [$lop->idL]) }}" rel="tooltip"
+                                                            title="Môn học" class="btn btn-info btn-simple btn-xs">
+                                                            <i class="fa fa-magic"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('class.edit', $lop->idL) }}" rel="tooltip"
+                                                            title="Sửa lớp" class="btn btn-success btn-simple btn-xs">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="" rel="tooltip" title="Ẩn lớp"
+                                                            class="btn btn-danger btn-simple btn-xs"
+                                                            onclick="return confirm('Đang trong quá trình nâng cấp')">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
                         {{ $class->appends(['search' => '$search'])->links('pagination::bootstrap-4') }}
                     </div><!--  end card  -->
                     <a href="{{ route('class.create') }}"><button type="submit" class="btn btn-fill btn-info"

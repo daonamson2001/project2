@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Diem extends Migration
+class Diemthilai extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Diem extends Migration
      */
     public function up()
     {
-        Schema::create('Diem', function (Blueprint $table) {
+        Schema::create('Diemthilai', function (Blueprint $table) {
             $table->string('idSV');
             $table->string('idMH');
             $table->unsignedBigInteger('idNH');
@@ -21,8 +21,8 @@ class Diem extends Migration
             $table->foreign('idSV')->references('idSV')->on('SinhVien');
             $table->foreign('idMH')->references('idMH')->on('MonHoc');
             $table->date('ThoiGian');
-            $table->float('LyThuyet');
-            $table->float('ThucHanh');
+            $table->float('ThiLaiLyThuyet');
+            $table->float('ThiLaiThucHanh');
         });
     }
 
@@ -33,6 +33,6 @@ class Diem extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Diem');
+        Schema::dropIfExists('Diemthilai');
     }
 }

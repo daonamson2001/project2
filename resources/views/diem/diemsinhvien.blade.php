@@ -11,20 +11,19 @@
         <table class="table table-hover table-striped">
             <thead>
                 <?php $dem = 1; ?>
-                <th>STT</th>
-                <th>Mã môn học</th>
-                <th>Tên môn học</th>
-                <th>Điểm lí thuyết</th>
-                <th>Điểm thực hành</th>
-                <th>Điểm thi lại lí thuyết</th>
-                <th>Điểm thi lại thực hành</th>
-                <th>Nhận xét</th>
-                <th colspan="3" style="text-align: right">Hành động</th>
+                <th style="text-align: center">STT</th>
+                <th style="text-align: center">Mã môn học</th>
+                <th style="text-align: center">Tên môn học</th>
+                <th style="text-align: center">Điểm lí thuyết</th>
+                <th style="text-align: center">Điểm thực hành</th>
+                <th style="text-align: center">Nhận xét</th>
+                <th colspan="2" style="text-align: center">Hành động</th>
             </thead>
             <tbody>
                 {{-- ------------------------ --}}
                 {{-- Diem duoi 5 --}}
                 <?php $rong = '-'; ?>
+                <?php $diemdo0 = 0; ?>
                 <?php $diemdo1 = 1; ?>
                 <?php $diemdo125 = 1.25; ?>
                 <?php $diemdo15 = 1.5; ?>
@@ -77,12 +76,14 @@
                 <?php foreach ($diem as $sinhvien): ?>
                 <?php $result = count($diem); ?>
                 <tr>
-                    <td>&ensp;{{ $dem++ }} </td>
-                    <td>{{ $sinhvien->idMH }}</td>
-                    <td>{{ $sinhvien->tenMH }}</td>
+                    <td style="text-align: center">&ensp;{{ $dem++ }} </td>
+                    <td style="text-align: center">{{ $sinhvien->idMH }}</td>
+                    <td style="text-align: center">{{ $sinhvien->tenMH }}</td>
                     <td style="text-align: center">
                         @if ($sinhvien->LyThuyet == '')
                             <a style="color:hotpink">{{ $rong }}</a>
+                        @elseif($sinhvien->LyThuyet == $diemdo0)
+                            <a style="color:red"> {{ $sinhvien->LyThuyet }}</a>
                         @elseif($sinhvien->LyThuyet == $diemdo1 )
                             <a style="color:red"> {{ $sinhvien->LyThuyet }}</a>
                         @elseif($sinhvien->LyThuyet == $diemdo125 )
@@ -162,6 +163,8 @@
                     <td style="text-align: center">
                         @if ($sinhvien->ThucHanh == '')
                             <a style="color:hotpink">{{ $rong }}</a>
+                        @elseif($sinhvien->ThucHanh == $diemdo0 )
+                            <a style="color:red"> {{ $sinhvien->ThucHanh }}</a>
                         @elseif($sinhvien->ThucHanh == $diemdo1 )
                             <a style="color:red"> {{ $sinhvien->ThucHanh }}</a>
                         @elseif($sinhvien->ThucHanh == $diemdo125 )
@@ -238,21 +241,3228 @@
                             <a style="color:#0099FF"> {{ $sinhvien->ThucHanh }}</a>
                         @endif
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="#" rel="tooltip" title="Thông tin lớp" class="btn btn-info btn-simple btn-xs">
+                    <?php $quamon = 'Qua môn'; ?>
+                    <?php $hoclai = 'Thi Lại'; ?>
+                    <td>
+                        @if ($sinhvien->LyThuyet == '')
+                            @if ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->ThucHanh =='')
+                            @if ($sinhvien->LyThuyet == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->LyThuyet =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->LyThuyet =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '0')
+                            @if ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '1')
+                            @if ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '1.25')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '1.5')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '1.75')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '2')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '2.25')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '2.5')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '2.75')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '3')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '3.25')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '3.5')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '3.75')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '4')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '4.25')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '4.5')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '4.75')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '5')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '5.25')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '5.5')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '5.75')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '6')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '6.25')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '6.5')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '6.75')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '7')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '7.25')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '7.5')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '7.75')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '8')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '8.25')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '8.5')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '8.75')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '9')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '9.25')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '9.5')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '9.75')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @elseif($sinhvien->LyThuyet == '10')
+                            @if ($sinhvien->ThucHanh == '0')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif ($sinhvien->ThucHanh == '1')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='1.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='2.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='3.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.25')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.5')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='4.75')
+                                <a style="color:red">{{ $hoclai }}</a>
+                            @elseif($sinhvien->ThucHanh =='5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='5.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='6.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='7.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='8.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.25')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.5')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='9.75')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @elseif($sinhvien->ThucHanh =='10')
+                                <a style="color:#0099FF"> {{ $quamon }}</a>
+                            @endif
+                        @endif
+                    </td>
+                    <?php $dtm1 = $sinhvien->LyThuyet; ?>
+                    <?php $dtm2 = $sinhvien->ThucHanh; ?>
+                    <?php $dtm3 = ($sinhvien->ThucHanh + $sinhvien->LyThuyet) / 2; ?>
+                    <td style="text-align: center">
+                        @if ($sinhvien->LyThuyet == '')
+                            @if ($sinhvien->ThucHanh / 1)
+                                {{ $sinhvien->ThucHanh }}
+                            @endif
+                        @elseif($sinhvien->ThucHanh == '')
+                            @if ($sinhvien->LyThuyet / 1)
+                                {{ $sinhvien->LyThuyet }}
+                            @endif
+                        @else
+                            {{ $dtm3 }}
+                        @endif
+                    </td>
+                    <td style="text-align: right">
+                        <a href="{{ route('diemthilai', [$sinhvien->idL, $sinhvien->tenMH, $sinhvien->idMH]) }}"
+                            rel="tooltip" title="Điểm thi lại" class="btn btn-info btn-simple btn-xs">
                             <i class="fa fa-user"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="#" rel="tooltip" title="Môn học" class="btn btn-info btn-simple btn-xs">
-                            <i class="fa fa-magic"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#" rel="tooltip" title="Sửa lớp" class="btn btn-success btn-simple btn-xs">
+                        <a href="{{ route('editDiem', [$sinhvien->idSV, $sinhvien->idL, $sinhvien->idMH, $sinhvien->tenMH]) }}"
+                            rel="tooltip" title="Sửa điểm" class="btn btn-success btn-simple btn-xs">
                             <i class="fa fa-edit"></i>
                         </a>
                     </td>

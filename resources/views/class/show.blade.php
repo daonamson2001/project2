@@ -48,15 +48,16 @@
                                             <i class="fa fa-magic"></i>
                                         </a>
                                     </td>
-                                    <td><a href="{{ route('student.edit', $sinhvien->idSV) }}" rel="tooltip"
-                                            title="Sửa thông tin" class="btn btn-success btn-simple btn-xs">
+                                    <td><a href="{{ route('student.edit', [$sinhvien->idSV, $sinhvien->tenLop]) }}"
+                                            rel="tooltip" title="Sửa thông tin" class="btn btn-success btn-simple btn-xs">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('student.destroy', $sinhvien->idSV) }}" method="post">
+                                        <form action="{{ route('student.destroy', [$sinhvien->idSV, $sinhvien->idL]) }}"
+                                            method="post">
                                             @csrf
-                                            @method("DELETE")
+                                            @method("PUT")
                                             <button>
                                                 <a href="#" rel="tooltip" title="Ẩn sviên"
                                                     class="btn btn-danger btn-simple btn-xs"
@@ -80,10 +81,10 @@
                         @endif
                     </div>
                     </br>
-                    <a href="{{ route('student.create', ['idL' => $idL]) }}"><button type="submit"
+                    <a href="{{ route('student.create', [$idL]) }}"><button type="submit"
                             class="btn btn-fill btn-info">Thêm sinh viên</button></a>
                     <a href="{{ route('student.insertByExcel') }}"><button type="submit" class="btn btn-fill btn-info"
-                            id="hihi">Thêm excel</button></a>
+                            id="hihi">Thêm Excel</button></a>
                     <a href="{{ route('student.export') }}"><button type="submit" class="btn btn-fill btn-info">Tải danh
                             sách sinh viên</button></a>
                 </div> <!-- end col-md-12 -->

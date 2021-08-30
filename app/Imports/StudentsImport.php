@@ -4,11 +4,27 @@ namespace App\Imports;
 
 use App\Models\Lop;
 use App\Models\Student;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Validators\Failure;
+use Throwable;
 
-class StudentsImport implements ToModel, WithHeadingRow
+class StudentsImport implements
+    ToModel,
+    WithHeadingRow,
+    SkipsOnError,
+    WithValidation,
+    SkipsOnFailure
+
 {
+    use Importable, SkipsErrors, SkipsFailures;
     /**
      * @param array $row
      *
@@ -26,10 +42,16 @@ class StudentsImport implements ToModel, WithHeadingRow
             "email" => $row['email'],
             "gioiTinh" => $row['gioi_tinh'] == "Nam" ? 1 : 0,
             "ngaySinh" => date("Y-m-d", strtotime($date)),
-            "idL" => Lop::where('tenLop', $row['id_lop'])->value('idL'),
+            "idL" => Lop::where('tenLop', $row['ma_lop'])->value('idL'),
             "queQuan" => $row['que_quan'],
-            "passWord" => $row['password'],
+            "passWord" => $row['mat_khau'],
         ];
         return new Student($data);
+    }
+    public function rules(): array
+    {
+        return [
+            '*.email' => ['email', 'unique:sinhvien,email']
+        ];
     }
 }

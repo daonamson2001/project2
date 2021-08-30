@@ -28,12 +28,17 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('indexdiem') }}">
-                    <i class="pe-7s-graph1"></i>
-                    <p>Thêm điểm</p>
+                <a href="{{ route('insertDiemByExcel') }}">
+                    <i class="pe-7s-smile"></i>
+                    <p>Thêm điểm sinh viên</p>
                 </a>
             </li>
-
+            <li>
+                <a href="{{ route('insertDiemthilaiByExcel') }}">
+                    <i class="pe-7s-piggy"></i>
+                    <p>Thêm điểm thi lại sinh viên</p>
+                </a>
+            </li>
             <li>
                 <a href="{{ route('calendar') }}">
                     <i class="pe-7s-date"></i>

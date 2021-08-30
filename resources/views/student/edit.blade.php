@@ -11,16 +11,18 @@
         <div class="card">
             <div class="header">Sửa lớp</div>
             <div class="content">
-                <form method="post" action="{{ route('student.update', $student->idSV) }}">
+                <form method="post" action="{{ route('student.update', [$idSV, $idL]) }}">
                     @method("PUT")
                     @csrf
                     <div class="form-group">
                         <label>Tên sinh viên</label>
-                        <input type="text" name="tenSV" value="{{ $student->tenSV }}" class="form-control">
+                        <input type="text" name="tenSV" value="{{ $student->tenSV }}" class="form-control"
+                            required="true">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" name="email" value="{{ $student->email }}" class="form-control">
+                        <input type="email" name="email" value="{{ $student->email }}" class="form-control"
+                            required="true">
                     </div>
                     <input type="hidden" name="passWord" value="{{ $student->passWord }}" class="form-control">
                     <div class="form-group">

@@ -11,6 +11,7 @@ class StudentsExport implements FromCollection, WithHeadings, WithMapping
 {
     public function map($student): array
     {
+        // dd($student);
         $date = date_create($student->ngaySinh);
         $data = [
             $student->idSV,

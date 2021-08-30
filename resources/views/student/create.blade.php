@@ -12,6 +12,7 @@
             <div class="header">Thêm sinh viên</div>
             <div class="content">
                 <form method="post" action="{{ route('student.store') }}">
+                    @method("PUT")
                     @csrf
                     <div class="form-group">
                         <label>Mã sinh viên</label>
