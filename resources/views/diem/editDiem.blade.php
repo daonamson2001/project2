@@ -16,6 +16,10 @@
                         <input type="text" name="ThucHanh" value="{{ $diem->ThucHanh }}" class="form-control">
                     </div>
                     <div class="form-group">
+                        <label>Điểm trung bình môn</label>
+                        <input type="text" name="ThucHanh" value="{{ $diem->Diemtbm }}" class="form-control">
+                    </div>
+                    <div class="form-group">
                         <label>Thời gian sửa điểm lần cuối</label>
                         <input type="date" name="ThoiGian" value="{{ $diem->ThoiGian }}" class="form-control">
                     </div>

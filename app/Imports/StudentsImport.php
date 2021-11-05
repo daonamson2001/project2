@@ -18,10 +18,10 @@ use Throwable;
 
 class StudentsImport implements
     ToModel,
-    WithHeadingRow,
-    SkipsOnError,
-    WithValidation,
-    SkipsOnFailure
+    WithHeadingRow
+// SkipsOnError,
+// WithValidation,
+// SkipsOnFailure
 
 {
     use Importable, SkipsErrors, SkipsFailures;
@@ -42,16 +42,11 @@ class StudentsImport implements
             "email" => $row['email'],
             "gioiTinh" => $row['gioi_tinh'] == "Nam" ? 1 : 0,
             "ngaySinh" => date("Y-m-d", strtotime($date)),
-            "idL" => Lop::where('tenLop', $row['ma_lop'])->value('idL'),
+            "idL" => Lop::where('tenLop', $row['ten_lop'])->value('idL'),
             "queQuan" => $row['que_quan'],
             "passWord" => $row['mat_khau'],
+            "HoatDong" => $row['hoat_dong'] == "Có" ? 1 : 0,
         ];
         return new Student($data);
-    }
-    public function rules(): array
-    {
-        return [
-            '*.email' => ['email', 'unique:sinhvien,email']
-        ];
     }
 }

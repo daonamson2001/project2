@@ -1,3 +1,17 @@
+<style>
+    #hehee {
+        font-size: 16px;
+        position: relative;
+        float: right;
+        top: -30px;
+    }
+
+    #hi {
+        position: relative;
+        top: 8px;
+    }
+
+</style>
 @extends('layouts.layout')
 @section('main')
     <div class="main-content">
@@ -9,8 +23,9 @@
         </form>
         <h1>Danh sách sinh viên</h1>
         <div class="container-fluid">
+            <h3>&ensp;Lớp: {{ $idL }}</h3>
+            <a href="{{ route('student.hideSv') }}" id="hehee">Danh sách sinh viên bị ẩn </a>
             <div class="row">
-                <h3>&ensp;Lớp: {{ $idL }}</h3>
                 <div class="col-md-12">
                     <div class="card">
                         <table class="table table-hover table-striped">
@@ -23,7 +38,6 @@
                                 <th>Giới tính</th>
                                 <th>Ngày sinh</th>
                                 <th>Quê quán</th>
-                                {{-- <th>Lớp</th> --}}
                                 <th>Chuyên ngành</th>
                                 <th colspan="3" style="text-align: center">Hành động</th>
                             </thead>
@@ -41,9 +55,8 @@
                                     {{-- Giới tính sẽ được sửa qua Student.php nếu chỉnh gioiTinh->GenderName --}}
                                     <td>{{ $sinhvien->ngaySinh }}</td>
                                     <td>{{ $sinhvien->queQuan }}</td>
-                                    {{-- <td>{{ $sinhvien->tenLop }}</td> --}}
                                     <td>{{ $sinhvien->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}</td>
-                                    <td><a href="{{ route('diemsinhvien', [$sinhvien->idL, $sinhvien->tenSV, $sinhvien->idSV]) }}"
+                                    <td><a href="{{ route('diemnamhoc', [$sinhvien->idL, $sinhvien->tenSV, $sinhvien->idSV]) }}"
                                             rel="tooltip" title="Điểm sinh viên" class="btn btn-info btn-simple btn-xs">
                                             <i class="fa fa-magic"></i>
                                         </a>
@@ -54,20 +67,16 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('student.destroy', [$sinhvien->idSV, $sinhvien->idL]) }}"
-                                            method="post">
+                                        <form action="{{ route('student.activeSv', [$sinhvien->idSV]) }}" method="post">
                                             @csrf
                                             @method("PUT")
-                                            <button>
-                                                <a href="#" rel="tooltip" title="Ẩn sviên"
-                                                    class="btn btn-danger btn-simple btn-xs"
-                                                    onclick="return confirm('Bạn có chắc muốn ẩn sinh viên này ?')">
-                                                    <i class=" fa fa-times"></i>
-                                                </a>
+                                            <button style="border:hidden"
+                                                onclick="return confirm('Bạn có chắc muốn ẩn sinh viên này ?')"
+                                                rel="tooltip" title="Ẩn sviên" class="btn btn-danger btn-simple btn-xs">
+                                                <i class=" fa fa-times" id="hi"></i>
                                             </button>
                                         </form>
                                     </td>
-                                    {{-- @endif --}}
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -85,8 +94,12 @@
                             class="btn btn-fill btn-info">Thêm sinh viên</button></a>
                     <a href="{{ route('student.insertByExcel') }}"><button type="submit" class="btn btn-fill btn-info"
                             id="hihi">Thêm Excel</button></a>
-                    <a href="{{ route('student.export') }}"><button type="submit" class="btn btn-fill btn-info">Tải danh
+                    <a href="{{ route('student.DowSV', [$idL]) }}"><button type="submit"
+                            class="btn btn-fill btn-info">Tải
+                            danh
                             sách sinh viên</button></a>
+                    <a href="{{ route('student.sampleSinhVien') }}"><button type="submit"
+                            class="btn btn-fill btn-info">Bản mẫu sinh viên</button></a>
                 </div> <!-- end col-md-12 -->
             </div>
         </div>

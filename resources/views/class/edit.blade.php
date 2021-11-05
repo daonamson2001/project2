@@ -15,11 +15,17 @@
                     <div class="form-group">
                         <label>Chuyên ngành</label>
                         <input type="text" name="idCN"
-                            value="{{ $class->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}" class="form-control">
+                            value="{{ $class->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Hoạt động</label>
+                        <input type="text" name="HoatDong" value="{{ $class->HoatDong == 1 ? 'Có' : 'Không' }}"
+                            class="form-control" required="true">
                     </div>
                     <button type="submit" class="btn btn-fill btn-info"
-                        onclick="return confirm('Cập nhập thành công !')">Cập nhập</button>
-
+                        onclick="return confirm('Cập nhập thành công !')">Cập
+                        nhập</button>
                 </form>
             </div>
         </div>

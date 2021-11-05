@@ -18,7 +18,7 @@ class ClassController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $class = Lop::where('tenLop', 'LIKE', "%$search%")->paginate(10);
+        $class = Lop::where('tenLop', 'LIKE', "%$search%")->where('HoatDong', '=', 1)->paginate(10);
         return view('class.index', ["class" => $class, "search" => $search,]);
     }
 
@@ -44,11 +44,13 @@ class ClassController extends Controller
         $idL = $req->get('idL');
         $tenLop = $req->get('tenLop');
         $idCN = $req->get('idCN');
+        $HoatDong = $req->get('HoatDong');
 
         $lop = new Lop();
         $lop->idL = $idL;
         $lop->tenLop = $tenLop;
         $lop->idCN = $idCN;
+        $lop->HoatDong = $HoatDong;
         $lop->save();
         return redirect(route('class.index'));
     }
@@ -62,7 +64,7 @@ class ClassController extends Controller
     public function show($id, Request $request)
     {
         $search = $request->get('search');
-        $student = Student::join('lop', 'sinhvien.idL', '=', 'lop.idL')->select('*')->where('sinhvien.idL', '=', $id)->paginate(10);
+        $student = Student::join('lop', 'sinhvien.idL', '=', 'lop.idL')->select('*')->where('sinhvien.idL', '=', $id)->where('sinhvien.HoatDong', '=', 1)->where('sinhvien.tenSV', 'LIKE', "%$search%")->paginate(10);
         return view('class.show', ["student" => $student, "idL" => $id, "search" => $search,]);
     }
 
@@ -88,8 +90,10 @@ class ClassController extends Controller
     public function update(Request $request, $id)
     {
         $tenLop =  $request->get('tenLop');
+        $HoatDong = $request->get('HoatDong');
         Lop::where('idL', $id)->update([
             "tenLop" => $tenLop,
+            "HoatDong" => $HoatDong == "Có" ? 1 : 0,
         ]);
         return redirect(route('class.index'));
     }
@@ -100,14 +104,4 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $lop = Lop::find($id);
-        $lop->delete();
-        return redirect(route('class.index'));
-    }
-    public function hide($tenLop)
-    {
-        echo $tenLop;
-    }
 }

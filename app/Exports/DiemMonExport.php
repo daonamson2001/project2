@@ -3,17 +3,16 @@
 namespace App\Exports;
 
 use App\Models\Diem;
-use Illuminate\Database\Eloquent\Collection;
-
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithMapping;
+use Illuminate\Database\Eloquent\Collection;
 
-class DiemExport implements FromCollection, WithHeadings, WithMapping
+class DiemMonExport implements FromCollection, WithHeadings
 {
-    public function __construct($flag = false)
+    public function __construct($idL, $idMH)
     {
-        $this->flag = $flag;
+        $this->idL = $idL;
+        $this->idMH = $idMH;
     }
     public function map($diem): array
     {
@@ -30,19 +29,11 @@ class DiemExport implements FromCollection, WithHeadings, WithMapping
     }
     public function headings(): array
     {
-        if ($this->flag) return [
-            'Mã sinh viên',
-            'Mã môn học',
-            'Mã năm học',
-            'Thời gian của môn được thêm',
-            'Điểm lý thuyết',
-            'Điểm thực hành',
-        ];
         return [
-            'Mã sinh viên',
-            'Mã môn học',
-            'Mã năm học',
-            'Thời gian của môn được thêm',
+            'Tên lớp',
+            'Tên môn học',
+            'Mã Sinh viên',
+            'Tên sinh viên',
             'Điểm lý thuyết',
             'Điểm thực hành',
         ];
@@ -52,7 +43,11 @@ class DiemExport implements FromCollection, WithHeadings, WithMapping
      */
     public function collection()
     {
-        if ($this->flag) return new Collection([]);
-        return Diem::all();
+        return Diem::join('sinhvien', 'diem.idSV', '=', 'sinhvien.idSV')
+            ->join('monhoc', 'diem.idMH', '=', 'monhoc.idMH')
+            ->select('sinhvien.idL', 'monhoc.tenMH', 'sinhvien.idSV', 'tenSV', 'LyThuyet', 'ThucHanh')
+            ->where('sinhvien.idL', $this->idL)
+            ->where('monhoc.idMH', $this->idMH)
+            ->get();
     }
 }

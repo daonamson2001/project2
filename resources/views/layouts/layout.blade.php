@@ -53,23 +53,7 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-gavel"></i>
-                                    <p class="hidden-md hidden-lg">
-                                        Actions
-                                        <b class="caret"></b>
-                                    </p>
-                                </a> --}}
-                                {{-- <ul class="dropdown-menu">
-                                    <li><a href="#">Create New Post</a></li>
-                                    <li><a href="#">Manage Something</a></li>
-                                    <li><a href="#">Do Nothing</a></li>
-                                    <li><a href="#">Submit to live</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Another Action</a></li>
-                                </ul> --}}
                             </li>
-
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell-o"></i>
@@ -103,6 +87,11 @@
                                             <i class="pe-7s-help1"></i> Trợ giúp
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('doipass', Session::get('idGV')) }}">
+                                            <i class="pe-7s-tools"></i> Mật khẩu
+                                        </a>
+                                    </li>
                                     <li class="divider"></li>
                                     <li>
                                         <a href="{{ route('logout') }}" class="text-danger">
@@ -112,7 +101,6 @@
                                     </li>
                                 </ul>
                             </li>
-
                         </ul>
                     </div>
                 </div>

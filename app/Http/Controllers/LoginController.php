@@ -23,7 +23,7 @@ class LoginController extends Controller
             $request->session()->put('idGV', $giaovu->idGV);
             $request->session()->put('gioiTinh', $giaovu->gioiTinh == 1 ? 'Thầy' : 'Cô');
             $request->session()->put('tenGV', $giaovu->tenGV);
-
+            $request->session()->put('passWord', $giaovu->passWord);
             return view('dashboard');
         } catch (Exception $e) {
             return redirect()->route('login')->with('error', 'Sai Email hoặc Mật khẩu !');

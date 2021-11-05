@@ -1,7 +1,14 @@
 <style>
-    #hihi:hover {
-        color: black;
-        background: white;
+    #hehee {
+        font-size: 16px;
+        position: relative;
+        float: right;
+        top: -30px;
+    }
+
+    #hi {
+        position: relative;
+        top: 8px;
     }
 
 </style>
@@ -16,28 +23,27 @@
         </form>
         <h1>Danh sách lớp</h1>
         <div class="container-fluid">
+            <a href="{{ route('student.hideLop') }}" id="hehee">Danh sách lớp bị ẩn </a>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="toolbar">
                         </div>
                         <div class="content">
-
                             <ul role="tablist" class="nav nav-tabs">
                                 <li role="presentation" class="active">
-                                    <a href="#agency" data-toggle="tab">
+                                    <a href="#lap-trinh-may-tinh" data-toggle="tab">
                                         <h5>Lập trình máy tính</h5>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#company" data-toggle="tab">
+                                    <a href="#quan-tri-mang" data-toggle="tab">
                                         <h5>Quản trị mạng</h5>
                                     </a>
                                 </li>
                             </ul>
-
                             <div class="tab-content">
-                                <div id="agency" class="tab-pane active">
+                                <div id="lap-trinh-may-tinh" class="tab-pane active">
                                     <table class="table table-hover table-striped">
                                         <thead>
                                             <th>Mã lớp</th>
@@ -71,11 +77,17 @@
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a href="" rel="tooltip" title="Ẩn lớp"
-                                                            class="btn btn-danger btn-simple btn-xs"
-                                                            onclick="return confirm('Đang trong quá trình nâng cấp')">
-                                                            <i class="fa fa-times"></i>
-                                                        </a>
+                                                        <form action="{{ route('student.activeLop', $lop->idL) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method("PUT")
+                                                            <button style="border:hidden"
+                                                                onclick="return confirm('Bạn có chắc muốn ẩn lớp này ?')"
+                                                                rel="tooltip" title="Ẩn lớp"
+                                                                class="btn btn-danger btn-simple btn-xs"><i
+                                                                    class=" fa fa-times" id="hi"></i>
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -83,7 +95,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div id="company" class="tab-pane">
+                                <div id="#quan-tri-mang" class="tab-pane">
                                     <table class="table table-hover table-striped">
                                         <thead>
                                             <th>Mã lớp</th>
@@ -117,11 +129,17 @@
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a href="" rel="tooltip" title="Ẩn lớp"
-                                                            class="btn btn-danger btn-simple btn-xs"
-                                                            onclick="return confirm('Đang trong quá trình nâng cấp')">
-                                                            <i class="fa fa-times"></i>
-                                                        </a>
+                                                        <form action="{{ route('student.activeLop', $lop->idL) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method("PUT")
+                                                            <button style="border:hidden"
+                                                                onclick="return confirm('Bạn có chắc muốn ẩn lớp này ?')"
+                                                                rel="tooltip" title="Ẩn lớp"
+                                                                class="btn btn-danger btn-simple btn-xs"><i
+                                                                    class=" fa fa-times"></i>
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -130,7 +148,6 @@
                                     </table>
                                 </div>
                             </div>
-
                         </div>
                         {{ $class->appends(['search' => '$search'])->links('pagination::bootstrap-4') }}
                     </div><!--  end card  -->

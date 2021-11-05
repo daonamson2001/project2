@@ -18,18 +18,18 @@
         <div class="content content-full-width">
             <ul role="tablist" class="nav nav-tabs">
                 <li role="presentation" class="active">
-                    <a href="#icon-info" data-toggle="tab"> Năm nhất</a>
+                    <a href="#icon-nam-nhat" data-toggle="tab"> Năm nhất</a>
                 </li>
                 <li>
-                    <a href="#icon-account" data-toggle="tab"> Năm hai</a>
+                    <a href="#icon-nam-hai" data-toggle="tab"> Năm hai</a>
                 </li>
                 <li>
-                    <a href="#icon-style" data-toggle="tab"> Năm ba</a>
+                    <a href="#icon-nam-ba" data-toggle="tab"> Năm ba</a>
                 </li>
             </ul>
 
             <div class="tab-content">
-                <div id="icon-info" class="tab-pane active">
+                <div id="icon-nam-nhat" class="tab-pane active">
                     <?php $idNH = 1; ?>
                     <?php $result = 0; ?>
                     @foreach ($class as $item)
@@ -38,7 +38,7 @@
                                 <?php $result = count($class); ?>
                                 <a href="{{ route('diemlop', [$item->idL, $item->tenMH, $item->idMH]) }}">
                                     <button type="submit" class="btn btn-fill btn-info">
-                                        <th>{{ $item->tenMH }}</th>
+                                        <th>{{ $item->idMH }} - {{ $item->tenMH }}</th>
                                     </button>
                                 </a>
                             @endif
@@ -59,7 +59,7 @@
                             class="btn btn-fill btn-info" id="hihi">Thêm
                             môn học</button></a>
                 </div>
-                <div id="icon-account" class="tab-pane">
+                <div id="icon-nam-hai" class="tab-pane">
                     <?php $idNH = 2; ?>
                     <?php $result = 0; ?>
                     @foreach ($class as $item)
@@ -68,7 +68,7 @@
                                 <?php $result = count($class); ?>
                                 <a href="{{ route('diemlop', [$item->idL, $item->tenMH, $item->idMH]) }}">
                                     <button type="submit" class="btn btn-fill btn-info">
-                                        <th>{{ $item->tenMH }}</th>
+                                        <th>{{ $item->idMH }} - {{ $item->tenMH }}</th>
                                     </button>
                                 </a>
                             @endif
@@ -88,7 +88,7 @@
                             class="btn btn-fill btn-info" id="hihi">Thêm
                             môn học</button></a>
                 </div>
-                <div id="icon-style" class="tab-pane">
+                <div id="icon-nam-ba" class="tab-pane">
                     <?php $idNH = 3; ?>
                     <?php $result = 0; ?>
                     @foreach ($class as $item)
@@ -97,7 +97,7 @@
                                 <?php $result = count($class); ?>
                                 <a href="{{ route('diemlop', [$item->idL, $item->tenMH, $item->idMH]) }}">
                                     <button type="submit" class="btn btn-fill btn-info">
-                                        <th>{{ $item->tenMH }}</th>
+                                        <th>{{ $item->idMH }} - {{ $item->tenMH }}</th>
                                     </button>
                                 </a>
                             @endif

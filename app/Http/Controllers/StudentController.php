@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DiemMonExport;
 use App\Exports\StudentsExport;
+use App\Exports\UsersExport;
 use App\Imports\StudentsImport;
 use App\Models\Lop;
 use App\Models\Student;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -28,6 +31,7 @@ class StudentController extends Controller
         $gioiTinh = $request->get('gioiTinh');
         $ngaySinh = $request->get('ngaySinh');
         $queQuan = $request->get('queQuan');
+        $HoatDong = $request->get('HoatDong');
         $idL = $request->get('idL');
 
         $student = new Student();
@@ -38,6 +42,7 @@ class StudentController extends Controller
         $student->gioiTinh = $gioiTinh;
         $student->ngaySinh = $ngaySinh;
         $student->queQuan = $queQuan;
+        $student->HoatDong = $HoatDong;
         $student->idL = $idL;
         $student->save();
         return redirect()->route('class.show', ['class' => $idL]);
@@ -47,8 +52,48 @@ class StudentController extends Controller
     {
         $student = Student::all();
     }
-
-
+    public function activeLop($idL)
+    {
+        Lop::where('idL', $idL)->update(
+            ["HoatDong" => 0]
+        );
+        return redirect()->back();
+    }
+    public function activeL($idL, Request $request)
+    {
+        Lop::where('idL', $idL)->update(
+            ["HoatDong" => 1]
+        );
+        $search = $request->get('search');
+        $class = Lop::where('tenLop', 'LIKE', "%$search%")->paginate(10);
+        return view('class.index', ["class" => $class, "search" => $search,]);
+    }
+    public function activeSv($idSV)
+    {
+        Student::where('idSV', $idSV)->update(
+            ["HoatDong" => 0]
+        );
+        return redirect()->back();
+    }
+    public function activeS($idSV)
+    {
+        Student::where('idSV', $idSV)->update(
+            ["HoatDong" => 1]
+        );
+        return redirect()->back();
+    }
+    public function hideLop(Request $request)
+    {
+        $search = $request->get('search');
+        $class = Lop::where('tenLop', 'LIKE', "%$search%")->where('HoatDong', '=', 0)->paginate(10);
+        return view('student.hideLop', ["class" => $class, "search" => $search,]);
+    }
+    public function hideSv(Request $request)
+    {
+        $search = $request->get('search');
+        $student = Student::join('lop', 'sinhvien.idL', '=', 'lop.idL')->select('*')->where('sinhvien.HoatDong', '=', 0)->where('sinhvien.tenSV', 'LIKE', "%$search%")->paginate(10);
+        return view('student.hideSv', ["student" => $student, "search" => $search,]);
+    }
     public function edit($idSV, $idL)
     {
         // dd($idSV);
@@ -66,6 +111,7 @@ class StudentController extends Controller
         $gioiTinh = $request->get('gioiTinh');
         $ngaySinh = $request->get('ngaySinh');
         $queQuan = $request->get('queQuan');
+        $HoatDong = $request->get('HoatDong');
 
         Student::where('idSV', $idSV)->update([
             "tenSV" => $tenSV,
@@ -74,14 +120,12 @@ class StudentController extends Controller
             "gioiTinh" => $gioiTinh == "Nam" ? 1 : 0,
             "ngaySinh" => $ngaySinh,
             "queQuan" => $queQuan,
+            "HoatDong" => $HoatDong == "Có" ? 1 : 0,
         ]);
         return redirect()->route('class.show', ['class' => $idL]);
     }
-
-
     public function destroy($idSV, $idL)
     {
-        Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
         $student = Student::where('idSV', $idSV);
         $student->delete();
         return redirect()->route('class.show', ['class' => $idL, "idSV" => $idSV]);
@@ -90,6 +134,50 @@ class StudentController extends Controller
     {
         return view('student.insertByExcel');
     }
+    public function previewSinhVien(Request $request)
+    {
+        $preview = Excel::toArray(new StudentsImport, $request->file('excel'));
+        try {
+            $previews = $preview[0][0];
+            $idSV = $previews['ma_sinh_vien'];
+            $tenSV = $previews['ho_ten'];
+            $email = $previews['email'];
+            $gioiTinh = $previews['gioi_tinh'];
+            $ngaySinh = $previews['ngay_sinh'];
+            $idL = $previews['ten_lop'];
+            $queQuan = $previews['que_quan'];
+            $passWord = $previews['mat_khau'];
+            if ($idSV == '' && $tenSV == '' && $email == '' && $gioiTinh == '' && $ngaySinh == '' && $idL == '' && $queQuan == '' && $passWord == '') throw new Exception();
+        } catch (Exception $e) {
+            return redirect()->back()->withStatus('File bị trống hoặc sai định dạng. Vui lòng kiểm tra lại');
+        }
+        session(['tmp_preview' => $preview[0]]);
+        return view('student.previewSinhVien', ['preview' => $preview[0]]);
+    }
+    public function confirmSinhVien()
+    {
+        $preview = session('tmp_preview');
+        if ($preview != null && count($preview) > 0) {
+            foreach ($preview as $previews) {
+                $date = str_replace("/", "-", $previews["ngay_sinh"]);
+                Student::create([
+                    'idSV' => $previews['ma_sinh_vien'],
+                    'tenSV' => $previews['ho_ten'],
+                    'email' => $previews['email'],
+                    'gioiTinh' => $previews['gioi_tinh'] == "Nam" ? 1 : 0,
+                    'ngaySinh' => date("Y-m-d", strtotime($date)),
+                    'idL' => $previews['ten_lop'],
+                    'queQuan' => $previews['que_quan'],
+                    'passWord' => $previews['mat_khau'],
+                ]);
+            }
+        }
+        return view('student.insertByExcel');
+    }
+    public function sampleSinhVien()
+    {
+        return Excel::download(new StudentsExport(true), 'Mau_sinh_vien.xlsx');
+    }
     public function insertByExcelprocess(Request $request)
     {
         // Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
@@ -97,8 +185,8 @@ class StudentController extends Controller
         $import = new StudentsImport;
         $import->import($file);
 
-        if ($import->failures()->isNotEmpty()) {
-            return redirect()->back()->withFailures($import->failures());
+        if ($import->failures()->attribute()) {
+            return redirect()->back()->withFailures($import->failures(), 'Lỗi trồng lỗi');
         }
         // dd($import->failures());
         return redirect()->back()->withStatus('Excel file imported successfully !');
@@ -106,5 +194,9 @@ class StudentController extends Controller
     public function export()
     {
         return Excel::download(new StudentsExport, 'Students.xlsx');
+    }
+    public function DowSV($idL)
+    {
+        return Excel::download(new UsersExport($idL), 'Danh_sach_sinh_vien.xlsx');
     }
 }

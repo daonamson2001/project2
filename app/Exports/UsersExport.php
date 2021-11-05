@@ -3,16 +3,15 @@
 namespace App\Exports;
 
 use App\Models\Student;
-use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class StudentsExport implements FromCollection, WithHeadings, WithMapping
+class UsersExport implements FromCollection, WithHeadings, WithMapping
 {
-    public function __construct($flag = false)
+    public function __construct($idL)
     {
-        $this->flag = $flag;
+        $this->idL = $idL;
     }
     public function map($student): array
     {
@@ -30,15 +29,6 @@ class StudentsExport implements FromCollection, WithHeadings, WithMapping
     }
     public function headings(): array
     {
-        if ($this->flag) return [
-            'Mã sinh viên',
-            'Họ tên',
-            'Email',
-            'Giới tính',
-            'Ngày sinh',
-            'Tên lớp',
-            'Quê quán',
-        ];
         return [
             'Mã sinh viên',
             'Họ tên',
@@ -50,12 +40,10 @@ class StudentsExport implements FromCollection, WithHeadings, WithMapping
         ];
     }
     /**
-     * 
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        if ($this->flag) return new Collection([]);
-        return Student::all();
+        if ($this->idL) return Student::where('idL', $this->idL)->get();
     }
 }

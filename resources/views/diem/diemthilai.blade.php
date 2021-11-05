@@ -11,12 +11,12 @@
         <table class=" table table-hover table-striped">
             <thead>
                 <?php $dem = 1; ?>
-                <th>STT</th>
-                <th>Mã học sinh</th>
-                <th>Tên học sinh</th>
+                <th style="text-align: center">STT</th>
+                <th style="text-align: center">Mã học sinh</th>
+                <th style="text-align: center">Tên học sinh</th>
                 <th style="text-align: center">Điểm thi lại lí thuyết</th>
                 <th style="text-align: center">Điểm thi lại thực hành</th>
-                <th>Nhận xét</th>
+                <th style="text-align: center">Nhận xét</th>
                 <th colspan="2" style="text-align: center">Hành động</th>
             </thead>
             <tbody>
@@ -75,9 +75,9 @@
                 <?php foreach ($monhoclai as $sinhvien): ?>
                 <?php $result = count($monhoclai); ?>
                 <tr>
-                    <td>&ensp;{{ $dem++ }} </td>
-                    <td>{{ $sinhvien->idSV }}</td>
-                    <td>{{ $sinhvien->tenSV }}</td>
+                    <td style="text-align: center">&ensp;{{ $dem++ }} </td>
+                    <td style="text-align: center">{{ $sinhvien->idSV }}</td>
+                    <td style="text-align: center">{{ $sinhvien->tenSV }}</td>
                     <td style="text-align: center">
                         @if ($sinhvien->ThiLaiLyThuyet == '')
                             <a style="color:hotpink">{{ $rong }}</a>
@@ -242,7 +242,7 @@
                     </td>
                     <?php $quamon = 'Qua môn'; ?>
                     <?php $hoclai = 'Học Lại'; ?>
-                    <td>
+                    <td style="text-align: center">
                         @if ($sinhvien->ThiLaiLyThuyet == '')
                             @if ($sinhvien->ThiLaiThucHanh == '1')
                                 <a style="color:red">{{ $hoclai }}</a>
