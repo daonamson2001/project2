@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\DiemController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LoginSvController;
 use App\Http\Controllers\ObjController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TonghopController;
 use App\Mail\AppMail;
-use App\Models\Diem;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -20,14 +21,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 //login routes
-Route::get('/', [LoginController::class, 'login'])->name('login');
+Route::get('/', [LoginSvController::class, 'loginSv'])->name('loginSv');
+Route::post('/home-sinhvien', [LoginSvController::class, 'processSv'])->name('login-process-sv');
+Route::get('/logout-sv', [LoginSvController::class, 'logoutSv'])->name('logoutSv');
+////////////////////////////////////////////////////////////////
+//login routes
+Route::get('/nguoi-kiem-duyet', [LoginController::class, 'login'])->name('login');
 Route::post('/home', [LoginController::class, 'process'])->name('login-process');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Sinh viên
+/////////////////////////////////////////////////
+Route::middleware([CheckLoginSv::class])->group(function () {
+    Route::get('/home-sinhvienn', function () {
+        return view('dashboardSv');
+    })->name('dashboardSv');
+    Route::get('index/{idL}/{idSV}/{tenSV}', [TonghopController::class, 'indexSv'])->name('indexSv');
+    Route::get('diem-sinhvien/{idL}/{idSV}/{tenSV}/{idNH}', [TonghopController::class, 'diemsinhvienSv'])->name('diemsinhvien-sv');
+    Route::get('diem-nam-hoc/{idL}/{idSV}/{tenSV}', [TonghopController::class, 'diemnamhocSv'])->name('diemnamhoc-sv');
+    Route::get('diem-thilai/{idL}/{tenMH}/{idMH}', [TonghopController::class, 'diemthilaiSv'])->name('diemthilai-sv');
+
+    //Đổi pass
+    Route::get('Doi-pass-sv/{idSV}', [TonghopController::class, 'doipassSv'])->name('doipass-sv');
+    Route::PUT('Doi-pass-sv-process/{idSV}', [TonghopController::class, 'doipass2Sv'])->name('doipass2-sv');
+});
 //
 Route::middleware([CheckLogin::class])->group(function () {
-
     //Đổi pass
     Route::get('Doi-pass/{idGV}', [DiemController::class, 'doipass'])->name('doipass');
     Route::PUT('Doi-pass-process/{idGV}', [DiemController::class, 'doipass2'])->name('doipass2');
@@ -46,7 +66,6 @@ Route::middleware([CheckLogin::class])->group(function () {
 
     //Excel điểm
     Route::get('sample', [DiemController::class, 'sample'])->name('sample');
-    Route::get('previewDiem-sinhvien', [DiemController::class, 'previewDiem'])->name('previewDiem');
     Route::post('confirm', [DiemController::class, 'confirm'])->name('confirm');
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Điểm trung bình môn
@@ -57,19 +76,16 @@ Route::middleware([CheckLogin::class])->group(function () {
     //điểm thi lại sinh viên
     Route::get('edit-diem-thi-lai/{idSV}/{idL}/{idMH}/{tenMH}', [DiemController::class, 'editDiemthilai'])->name('editDiemthilai');
     Route::PUT('update-diem-thi-lai/{idSV}/{idL}/{tenMH}/{idMH}', [DiemController::class, 'updateDiemthilai'])->name('updateDiemthilai');
-    Route::get('diem-thi-lai/{idL}/{tenMH}/{idMH}', [DiemController::class, 'diemthilai'])->name('diemthilai');
+    Route::get('diem-thi-lai/{idSV}/{tenMH}/{idMH}', [DiemController::class, 'diemthilai'])->name('diemthilai');
     Route::get('/insert-diem-thi-lai-by-excel', [DiemController::class, 'insertDiemthilaiByExcel'])->name('insertDiemthilaiByExcel');
     Route::post('/insert-diem-thi-lai-by-excel-process', [DiemController::class, 'insertDiemthilaiByExcelprocess'])->name('insertDiemthilaiByExcelprocess');
     Route::get('/export-diem-thi-lai', [DiemController::class, 'exportDiemthilai'])->name('exportDiemthilai');
 
     //Excel điểm thi lại sinh viên
     Route::get('sample-diem-thi-lai', [DiemController::class, ['sampleDiem']])->name('sampleDiem');
-    Route::get('previewDiem-thi-lai', [DiemController::class, 'previewDiemthilai'])->name('previewDiemthilai');
-    Route::post('confirmDiem', [DiemController::class, 'confirmDiem'])->name('confirmDiem');
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //sinhvien
     Route::prefix('student')->name('student.')->group(function () {
-        // Route::get('{tenSV}/hide', [StudentController::class, 'hide'])->name('hide');
         Route::get('/export', [StudentController::class, 'export'])->name('export');
         Route::get('insert-sinhvien/{idL}', [StudentController::class, 'create'])->name('create');
         Route::get('edit-sinhvien/{idSV}/{idL}', [StudentController::class, 'edit'])->name('edit');
@@ -100,7 +116,7 @@ Route::middleware([CheckLogin::class])->group(function () {
     Route::PUT('delete/{idMH}/{idL}', [ObjController::class, 'deletemonhoc'])->name('deletemonhoc');
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //trang chủ
-    Route::get('/home', function () {
+    Route::get('/homee', function () {
         return view('dashboard');
     })->name('dashboard');
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

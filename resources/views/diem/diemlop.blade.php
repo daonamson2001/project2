@@ -175,14 +175,14 @@
                             <i class="fa fa-edit"></i>
                         </a>
                     </td>
-                    <td style="text-align: center" id="hi">
+                    <td style="text-align: center">
                         <form action="{{ route('deleteDiem', [$sinhvien->idSV, $sinhvien->idMH, $sinhvien->idNH]) }}"
                             method="post">
                             @csrf
                             @method('PUT')
-                            <button style="border:hidden" onclick="return confirm('Bạn có chắc muốn xóa điểm này ?')"
-                                rel="tooltip" title="Xóa điểm" class="btn btn-danger btn-simple btn-xs"><i
-                                    class=" fa fa-times"></i>
+                            <button style="border:hidden" id="hi"
+                                onclick="return confirm('Bạn có chắc muốn xóa điểm này ?')" rel="tooltip" title="Xóa điểm"
+                                class="btn btn-danger btn-simple btn-xs"><i class=" fa fa-times"></i>
                             </button>
                         </form>
                     </td>
@@ -201,13 +201,17 @@
             <?php $nd = 'Hiện điểm đang trống, hãy thêm điểm cho sinh viên !'; ?>
             @if ($result == 0)
                 {{ $nd }}
+            @else
+                <a href="{{ route('DowDiemMonHoc', [$idL, $idMH]) }}"><button type="submit"
+                        class="btn btn-fill btn-info">Tải
+                        điểm
+                        môn
+                        học</button></a>
             @endif
         </div>
         </br>
         <a href="{{ route('insertDiemByExcel') }}"><button type="submit" class="btn btn-fill btn-info">Thêm
                 điểm</button></a>
-        <a href="{{ route('DowDiemMonHoc', [$idL, $idMH]) }}"><button type="submit" class="btn btn-fill btn-info">Tải điểm
-                môn
-                học</button></a>
+
     </div>
 @endsection

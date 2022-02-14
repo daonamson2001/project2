@@ -95,7 +95,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div id="#quan-tri-mang" class="tab-pane">
+                                <div id="quan-tri-mang" class="tab-pane">
                                     <table class="table table-hover table-striped">
                                         <thead>
                                             <th>Mã lớp</th>

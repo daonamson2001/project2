@@ -18,10 +18,10 @@ use Throwable;
 
 class StudentsImport implements
     ToModel,
-    WithHeadingRow
-// SkipsOnError,
-// WithValidation,
-// SkipsOnFailure
+    WithHeadingRow,
+    SkipsOnError,
+    WithValidation,
+    SkipsOnFailure
 
 {
     use Importable, SkipsErrors, SkipsFailures;
@@ -48,5 +48,11 @@ class StudentsImport implements
             "HoatDong" => $row['hoat_dong'] == "Có" ? 1 : 0,
         ];
         return new Student($data);
+    }
+    public function rules(): array
+    {
+        return [
+            '*.email' => ['email', 'unique:sinhvien,email']
+        ];
     }
 }

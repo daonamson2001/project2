@@ -51,7 +51,7 @@ class DiemController extends Controller
         $diem->delete();
         return redirect()->back();
     }
-    public function diemthilai($idL, $tenMH, Request $request, $idMH)
+    public function diemthilai($idL, $tenMH, $idMH, Request $request)
     {
         $search = $request->get('search');
         $monhoclai = Diemthilai::join('sinhvien', 'diemthilai.idSV', '=', 'sinhvien.idSV')
@@ -94,12 +94,10 @@ class DiemController extends Controller
         $LyThuyet =  $request->get('LyThuyet');
         $ThucHanh = $request->get('ThucHanh');
         $ThoiGian = $request->get('ThoiGian');
-        $Diemtbm = $request->get('Diemtbm');
         Diem::where('idSV', $idSV)->update([
             "LyThuyet" => $LyThuyet,
             "ThucHanh" => $ThucHanh,
             "ThoiGian" => $ThoiGian,
-            "Diemtbm" => $Diemtbm,
         ]);
         return redirect()->route('diemlop', ['idL' => $idL, "tenMH" => $tenMH, "idMH" => $idMH]);
     }
@@ -127,7 +125,7 @@ class DiemController extends Controller
     {
         return view('diem.insertDiemByExcel');
     }
-    public function previewDiem(Request $request)
+    public function insertDiemByExcelprocess(Request $request)
     {
         $preview = Excel::toArray(new DiemImport, $request->file('excel'));
         try {
@@ -140,28 +138,10 @@ class DiemController extends Controller
             $ThucHanh = $previews['diem_thuc_hanh'];
             if ($idSV == '' && $idMH == '' && $idNH == '' && $ThoiGian == '') throw new Exception();
         } catch (Exception $e) {
-            return redirect()->back()->withStatus('File bị trống hoặc sai định dạng. Vui lòng kiểm tra lại');
+            return redirect()->back()->withMessage('File bị trống hoặc sai định dạng. Vui lòng kiểm tra lại');
         }
-        session(['tmp_preview' => $preview[0]]);
-        return view('diem.previewDiem', ['preview' => $preview[0]]);
-    }
-    public function confirm()
-    {
-        $preview = session('tmp_preview');
-        if ($preview != null && count($preview) > 0) {
-            foreach ($preview as $previews) {
-                $date = str_replace("/", "-", $previews["thoi_gian_cua_mon_duoc_them"]);
-                Diem::create([
-                    'idSV' => $previews['ma_sinh_vien'],
-                    'idMH' => $previews['ma_mon_hoc'],
-                    'idNH' => $previews['ma_nam_hoc'],
-                    'ThoiGian' => date("Y-m-d", strtotime($date)),
-                    'LyThuyet' => $previews['diem_ly_thuyet'],
-                    'ThucHanh' => $previews['diem_thuc_hanh'],
-                ]);
-            }
-        }
-        return view('diem.insertDiemByExcel');
+        Excel::import(new DiemImport, $request->file('excel'));
+        return redirect()->back()->withStatus('Thêm thành công !');
     }
 
     public function exportDiem()
@@ -211,7 +191,6 @@ class DiemController extends Controller
                     [
                         "LyThuyet" => $previews['diem_ly_thuyet'],
                         "ThucHanh" => $previews['diem_thuc_hanh'],
-                        "Diemtbm" => $previews['diem_trung_binh'],
                     ]
                 );
             }
@@ -224,7 +203,7 @@ class DiemController extends Controller
     {
         return view('diem.insertDiemthilaiByExcel');
     }
-    public function previewDiemthilai(Request $request)
+    public function insertDiemthilaiByExcelprocess(Request $request)
     {
         $preview = Excel::toArray(new DiemthilaiImport, $request->file('excel'));
         try {
@@ -237,28 +216,10 @@ class DiemController extends Controller
             $ThucHanh = $previews['diem_thuc_hanh_thi_lai'];
             if ($idSV == '' && $idMH == '' && $idNH == '' && $ThoiGian == '') throw new Exception();
         } catch (Exception $e) {
-            return redirect()->back()->withStatus('File bị trống hoặc sai định dạng. Vui lòng kiểm tra lại !');
+            return redirect()->back()->withMessage('File bị trống hoặc sai định dạng. Vui lòng kiểm tra lại !');
         }
-        session(['tmp_preview' => $preview[0]]);
-        return view('diem.previewDiemthilai', ['preview' => $preview[0]]);
-    }
-    public function confirmDiem()
-    {
-        $preview = session('tmp_preview');
-        if ($preview != null && count($preview) > 0) {
-            foreach ($preview as $previews) {
-                $date = str_replace("/", "-", $previews["thoi_gian_cua_mon_duoc_them"]);
-                Diemthilai::create([
-                    'idSV' => $previews['ma_sinh_vien'],
-                    'idMH' => $previews['ma_mon_hoc'],
-                    'idNH' => $previews['ma_nam_hoc'],
-                    'ThoiGian' => date("Y-m-d", strtotime($date)),
-                    'LyThuyet' => $previews['diem_ly_thuyet_thi_lai'],
-                    'ThucHanh' => $previews['diem_thuc_hanh_thi_lai'],
-                ]);
-            }
-        }
-        return view('diem.insertDiemthilaiByExcel');
+        Excel::import(new DiemthilaiImport, $request->file('excel'));
+        return redirect()->back()->withStatus('Thêm thành công !');
     }
     public function exportDiemthilai()
     {

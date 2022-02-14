@@ -24,11 +24,10 @@
                             <option value="2">Quản trị mạng</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <label>Hoạt động</label>
                         <select class="form-control" name="HoatDong">
-                            <option value="1">Có</option>
-                            <option value="0">Không</option>
+                            <option value="1" checked>Có</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-fill btn-info" onclick="return user()">Thêm</button>

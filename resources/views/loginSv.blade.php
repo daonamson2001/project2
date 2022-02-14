@@ -52,11 +52,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                            <form method="post" action="{{ route('login-process') }}">
+                            <form method="post" action="{{ route('login-process-sv') }}">
                                 @csrf
                                 <!--   if you want to have the card without animation please remove the ".card-hidden" class   -->
                                 <div class="card card-hidden">
-                                    <div class="header text-center">Đăng nhập dành cho giáo vụ</div>
+                                    <div class="header text-center">Đăng nhập</div>
                                     <div class="content">
                                         <div class="form-group">
                                             <labl>Email</labl>
@@ -80,7 +80,7 @@
                                         <button type="submit" class="btn btn-fill btn-warning btn-wd">Đăng nhập</button>
                                     </div>
                                     <div style="text-align: center; top: 10px; position: relative">
-                                        <a href="{{ route('loginSv') }}">Không phải là giáo vụ ?</a>
+                                        Giáo vụ đăng nhập<a href="{{ route('login') }}"> tại đây</a>
                                     </div>
                                 </div>
                             </form>

@@ -134,7 +134,11 @@ class StudentController extends Controller
     {
         return view('student.insertByExcel');
     }
-    public function previewSinhVien(Request $request)
+    public function sampleSinhVien()
+    {
+        return Excel::download(new StudentsExport(true), 'Mau_sinh_vien.xlsx');
+    }
+    public function insertByExcelprocess(Request $request)
     {
         $preview = Excel::toArray(new StudentsImport, $request->file('excel'));
         try {
@@ -147,46 +151,18 @@ class StudentController extends Controller
             $idL = $previews['ten_lop'];
             $queQuan = $previews['que_quan'];
             $passWord = $previews['mat_khau'];
-            if ($idSV == '' && $tenSV == '' && $email == '' && $gioiTinh == '' && $ngaySinh == '' && $idL == '' && $queQuan == '' && $passWord == '') throw new Exception();
+            $HoatDong = $previews['hoat_dong'];
+            if ($idSV == '' && $tenSV == '' && $email == '' && $gioiTinh == '' && $ngaySinh == '' && $idL == '' && $queQuan == '' && $passWord == '' && $HoatDong == '') throw new Exception();
         } catch (Exception $e) {
-            return redirect()->back()->withStatus('File bị trống hoặc sai định dạng. Vui lòng kiểm tra lại');
+            return redirect()->back()->withMessage('File bị trống hoặc sai định dạng. Vui lòng kiểm tra lại !');
         }
-        session(['tmp_preview' => $preview[0]]);
-        return view('student.previewSinhVien', ['preview' => $preview[0]]);
-    }
-    public function confirmSinhVien()
-    {
-        $preview = session('tmp_preview');
-        if ($preview != null && count($preview) > 0) {
-            foreach ($preview as $previews) {
-                $date = str_replace("/", "-", $previews["ngay_sinh"]);
-                Student::create([
-                    'idSV' => $previews['ma_sinh_vien'],
-                    'tenSV' => $previews['ho_ten'],
-                    'email' => $previews['email'],
-                    'gioiTinh' => $previews['gioi_tinh'] == "Nam" ? 1 : 0,
-                    'ngaySinh' => date("Y-m-d", strtotime($date)),
-                    'idL' => $previews['ten_lop'],
-                    'queQuan' => $previews['que_quan'],
-                    'passWord' => $previews['mat_khau'],
-                ]);
-            }
-        }
-        return view('student.insertByExcel');
-    }
-    public function sampleSinhVien()
-    {
-        return Excel::download(new StudentsExport(true), 'Mau_sinh_vien.xlsx');
-    }
-    public function insertByExcelprocess(Request $request)
-    {
         // Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
         $file = $request->file('excel')->store('import');
         $import = new StudentsImport;
         $import->import($file);
 
-        if ($import->failures()->attribute()) {
-            return redirect()->back()->withFailures($import->failures(), 'Lỗi trồng lỗi');
+        if ($import->failures()->isNotEmpty()) {
+            return redirect()->back()->withFailures($import->failures());
         }
         // dd($import->failures());
         return redirect()->back()->withStatus('Excel file imported successfully !');

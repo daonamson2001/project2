@@ -46,11 +46,10 @@
                         <label>Quê quán</label>
                         <input type="text" name="queQuan" class="form-control" required="true">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <label>Hoạt động</label>
                         <select class="form-control" name="HoatDong">
                             <option value="1">Có</option>
-                            <option value="0">Không</option>
                         </select>
                     </div>
                     <div class="form-group">

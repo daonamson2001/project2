@@ -44,7 +44,7 @@
                         <label>Lớp</label>
                         <input type="text" name="idL" value="{{ $student->idL }}" class="form-control" readonly>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <label>Hoạt động</label>
                         <input type="text" name="HoatDong" value="{{ $student->HoatDong == 1 ? 'Có' : 'Không' }}"
                             class="form-control" required="true">

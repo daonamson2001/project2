@@ -7,7 +7,7 @@
                 <span class="input-group-addon"><button><i class="fa fa-search"></i></button></span>
             </div>
         </form>
-        <h1>Danh sách sinh viên</h1>
+        <h1>Danh sách sinh viên bị ẩn</h1>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">

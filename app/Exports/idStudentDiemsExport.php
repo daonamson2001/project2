@@ -21,7 +21,6 @@ class idStudentDiemsExport implements FromCollection, WithHeadings
             $diem->idSV,
             $diem->idMH,
             $diem->idNH,
-            date_format($date, "d/m/Y"),
             $diem->LyThuyet,
             $diem->ThucHanh,
         ];

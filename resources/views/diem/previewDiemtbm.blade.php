@@ -13,7 +13,6 @@
                 <th style="text-align: center">Thời gian của môn được thêm</th>
                 <th style="text-align: center">Điểm lý thuyết</th>
                 <th style="text-align: center">Điểm thực hành</th>
-                <th style="text-align: center">Điểm trung bình</th>
             </thead>
             @foreach ($previews as $sinhvien)
                 <tr>
@@ -24,14 +23,13 @@
                     <td style="text-align: center">{{ $sinhvien['thoi_gian_cua_mon_duoc_them'] }}</td>
                     <td style="text-align: center">{{ $sinhvien['diem_ly_thuyet'] }}</td>
                     <td style="text-align: center">{{ $sinhvien['diem_thuc_hanh'] }}</td>
-                    <td style="text-align: center">{{ $sinhvien['diem_trung_binh'] }}</td>
                 </tr>
             @endforeach
         </table>
         </br>
         <form action="{{ route('confirmDiemtbm') }}" method="post">
             @csrf
-            <button type="submit" class="btn btn-fill btn-info" onclick="return confirm('Thêm thành công !')">Thêm</button>
+            <button type="submit" class="btn btn-fill btn-info">Thêm</button>
         </form>
     </div>
 @endsection

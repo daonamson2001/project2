@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Lop;
 use App\Models\Student;
-use Illuminate\Support\Facades\DB;
 
 class ClassController extends Controller
 {

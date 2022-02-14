@@ -148,11 +148,13 @@
                         Điểm trung bình năm học:
                         <span id='tbn'></span>
                     </div>
+                    </br>
+                    <a href="{{ route('exportDiemSV', [$idSV, $idNH]) }}"><button type="submit"
+                            class="btn btn-fill btn-info">Tải
+                            điểm sinh viên</button></a>
                 @endif
             </div>
-            </br>
-            <a href="{{ route('exportDiemSV', [$idSV, $idNH]) }}"><button type="submit" class="btn btn-fill btn-info">Tải
-                    điểm sinh viên</button></a>
+
         </div>
         <script>
             var vTb = document.getElementsByClassName('tb');

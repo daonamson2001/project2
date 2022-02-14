@@ -7,9 +7,46 @@
                 {{ session('status') }}
             </div>
         @endif
-        <form method="post" action="{{ route('student.previewSinhVien') }}" enctype="multipart/form-data">
+        @if (session('message'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
+        @if (isset($errors) && $errors->any())
+            <div class="alert alert-danger" role="alert">
+                @foreach ($errors->all() as $error)
+                    {{ $error }}
+                @endforeach
+            </div>
+        @endif
+        @if (session()->has('failures'))
+            <table class="table table-danger">
+                <tr>
+                    <th style="text-align: center">Row</th>
+                    <th style="text-align: center">Attributes</th>
+                    <th style="text-align: center">Errors</th>
+                    <th style="text-align: center">Values</th>
+                </tr>
+                @foreach (session()->get('failures') as $validation)
+                    <tr>
+                        <td style="text-align: center;color:red">{{ $validation->row() }}</td>
+                        <td style="text-align: center;color:red">{{ $validation->attribute() }}</td>
+                        <td style="text-align: center;color:red">
+                            <ul>
+                                @foreach ($validation->errors() as $e)
+                                    {{ $e }}
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td style="text-align: center;color:red">
+                            {{ $validation->values()[$validation->attribute()] }}</td>
+                        </td>
+                    </tr>
+                @endforeach
+            </table>
+        @endif
+        <form method="post" action="{{ route('student.insertByExcelprocess') }}" enctype="multipart/form-data">
             @csrf
-            @method("GET")
             <div class="form-group">
                 <label for="formFileLg" class="form-label">Hí looo</label>
                 <input class="form-control form-control-lg" name="excel" id="formFileLg" type="file" required="true"

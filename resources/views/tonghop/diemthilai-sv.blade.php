@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layout-sv')
 @section('main')
     <div class="main-content">
         <form class="navbar-search-form" role="search">
@@ -10,8 +10,6 @@
         <h2>Môn thi lại: {{ $tenMH }}</h2>
         <table class=" table table-hover table-striped">
             <thead>
-                <?php $dem = 1; ?>
-                <th style="text-align: center">STT</th>
                 <th style="text-align: center">Mã học sinh</th>
                 <th style="text-align: center">Tên học sinh</th>
                 <th style="text-align: center">Điểm thi lại lí thuyết</th>
@@ -24,7 +22,6 @@
                 <?php foreach ($monhoclai as $sinhvien): ?>
                 <?php $result = count($monhoclai); ?>
                 <tr>
-                    <td style="text-align: center">&ensp;{{ $dem++ }} </td>
                     <td style="text-align: center">{{ $sinhvien->idSV }}</td>
                     <td style="text-align: center">{{ $sinhvien->tenSV }}</td>
                     <td style="text-align: center">

@@ -22,7 +22,7 @@ class DiemExport implements FromCollection, WithHeadings, WithMapping
             $diem->idSV,
             $diem->idMH,
             $diem->idNH,
-            date_format($date, "d/m/Y"),
+            // date_format($date, "d/m/Y"),
             $diem->LyThuyet,
             $diem->ThucHanh,
         ];
@@ -34,7 +34,7 @@ class DiemExport implements FromCollection, WithHeadings, WithMapping
             'Mã sinh viên',
             'Mã môn học',
             'Mã năm học',
-            'Thời gian của môn được thêm',
+            // 'Thời gian của môn được thêm',
             'Điểm lý thuyết',
             'Điểm thực hành',
         ];

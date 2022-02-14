@@ -5,14 +5,13 @@ namespace App\Exports;
 use App\Models\Diem;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Illuminate\Database\Eloquent\Collection;
 
-class DiemMonExport implements FromCollection, WithHeadings
+class idSVExport implements FromCollection, WithHeadings
 {
-    public function __construct($idL, $idMH)
+    public function __construct($idSV, $idNH)
     {
-        $this->idL = $idL;
-        $this->idMH = $idMH;
+        $this->idSV = $idSV;
+        $this->idNH = $idNH;
     }
     public function map($diem): array
     {
@@ -29,12 +28,12 @@ class DiemMonExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Tên lớp',
-            'Tên môn học',
-            'Mã Sinh viên',
+            'Mã sinh viên',
             'Tên sinh viên',
+            'Tên môn học',
             'Điểm lý thuyết',
             'Điểm thực hành',
+            'Điểm trung bình môn',
         ];
     }
     /**
@@ -44,9 +43,14 @@ class DiemMonExport implements FromCollection, WithHeadings
     {
         return Diem::join('sinhvien', 'diem.idSV', '=', 'sinhvien.idSV')
             ->join('monhoc', 'diem.idMH', '=', 'monhoc.idMH')
-            ->select('sinhvien.idL', 'monhoc.tenMH', 'sinhvien.idSV', 'tenSV', 'LyThuyet', 'ThucHanh')
-            ->where('sinhvien.idL', $this->idL)
-            ->where('monhoc.idMH', $this->idMH)
+            ->select(DB::raw('sinhvien.idSV,sinhvien.tenSV,monhoc.tenMH,LyThuyet, ThucHanh,
+        CASE
+        WHEN LyThuyet IS NULL THEN ThucHanh
+        WHEN ThucHanh IS NULL THEN LyThuyet
+        ELSE (LyThuyet + ThucHanh)/2
+        END AS dtb'))
+            ->where('sinhvien.idSV', $this->idSV)
+            ->where('monhoc.idNH', $this->idNH)
             ->get();
     }
 }

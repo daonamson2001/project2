@@ -18,7 +18,7 @@
                             value="{{ $class->idCN == 1 ? 'Lập trình máy tính' : 'Quản trị mạng' }}"
                             class="form-control">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <label>Hoạt động</label>
                         <input type="text" name="HoatDong" value="{{ $class->HoatDong == 1 ? 'Có' : 'Không' }}"
                             class="form-control" required="true">
